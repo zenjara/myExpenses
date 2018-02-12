@@ -1,0 +1,23 @@
+AppBundle\Entity\Currency:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\CurrencyRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        code:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }
+    oneToMany:
+        expenses:
+            targetEntity: Expense
+            mappedBy: currency
