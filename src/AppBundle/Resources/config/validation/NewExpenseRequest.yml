@@ -1,0 +1,11 @@
+AppBundle\Request\NewExpenseRequest:
+    properties:
+        expenseCategoryId:
+            - NotBlank: ~
+            - NotNull: ~
+        currencyId:
+            - NotBlank: ~
+            - NotNull: ~
+        amount:
+            - NotBlank: ~
+            - NotNull: ~

@@ -1,0 +1,2 @@
+app_expense:
+    resource: 'routing/expense.yml'

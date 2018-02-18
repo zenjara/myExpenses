@@ -1,0 +1,4 @@
+services:
+    app.validation_error_view_factory:
+        class: AppBundle\Factory\ValidationErrorViewFactory
+        arguments: "%app.view.validation_error.class%"

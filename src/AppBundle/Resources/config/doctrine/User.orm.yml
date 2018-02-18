@@ -10,6 +10,7 @@ AppBundle\Entity\User:
         expenses:
             targetEntity: Expense
             mappedBy: user
+            cascade: ["persist", "remove"]
     oneToOne:
         dailyLimit:
             targetEntity: DailyLimit
