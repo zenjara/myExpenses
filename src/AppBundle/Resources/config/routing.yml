@@ -1,2 +1,4 @@
 app_expense:
     resource: 'routing/expense.yml'
+app_user:
+    resource: 'routing/user.yml'

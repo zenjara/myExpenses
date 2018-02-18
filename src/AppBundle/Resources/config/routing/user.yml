@@ -1,0 +1,4 @@
+api_get_my_personal_information:
+    path: /me
+    methods: GET
+    defaults: { _controller: AppBundle:Profile:getProfile }
