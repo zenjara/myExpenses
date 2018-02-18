@@ -17,8 +17,13 @@ class ExpenseController extends FOSRestController
         /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
+        $data = [];
+
         $expenses = $user->getExpenses();
-        $view = $this->view($expenses, 200);
+        foreach ($expenses as $expense){
+           $data[]= $this->get('app.expense_view_factory')->create($expense);
+        }
+        $view = $this->view($data, 200);
 
         return $this->handleView($view);
     }
