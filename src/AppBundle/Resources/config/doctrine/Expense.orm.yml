@@ -19,6 +19,7 @@ AppBundle\Entity\Expense:
             type: datetime
         updatedAt:
             type: datetime
+            nullable: true
     lifecycleCallbacks: {  }
     manyToOne:
         user:

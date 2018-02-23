@@ -1,0 +1,5 @@
+AppBundle\Request\GetSingleExpenseRequest:
+    properties:
+        expenseId:
+            - NotBlank: ~
+            - NotNull: ~

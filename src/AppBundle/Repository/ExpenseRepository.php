@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Expense;
+
 /**
  * ExpenseRepository
  *
@@ -10,4 +12,15 @@ namespace AppBundle\Repository;
  */
 class ExpenseRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function add(Expense $expense)
+    {
+        $this->_em->persist($expense);
+        $this->_em->flush();
+    }
+
+    public function remove(Expense $expense)
+    {
+        $this->_em->remove($expense);
+        $this->_em->flush();
+    }
 }

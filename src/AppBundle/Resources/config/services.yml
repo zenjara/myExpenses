@@ -1,0 +1,9 @@
+parameters:
+    app.view.validation_error.class:
+        class: AppBundle\View\ValidationErrorView
+
+imports:
+    - { resource: services/factories.yml }
+
+
+

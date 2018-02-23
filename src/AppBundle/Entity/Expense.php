@@ -2,8 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Expense
+ * @ORM\Entity
+ * @ORM\Table(name="person")
+ * @ORM\HasLifecycleCallbacks
  */
 class Expense
 {
@@ -46,6 +50,11 @@ class Expense
      * @var Currency
      */
     private $currency;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime("now");
+    }
 
     /**
      * Get id
@@ -141,6 +150,16 @@ class Expense
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
     }
 
     /**
