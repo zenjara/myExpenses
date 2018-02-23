@@ -17,6 +17,10 @@ class DailyLimit
      */
     private $amount;
 
+    /**
+     * @var Currency
+     */
+    private $currency;
 
     /**
      * Get id
@@ -50,6 +54,22 @@ class DailyLimit
     public function getAmount()
     {
         return $this->amount;
+    }
+
+    /**
+     * @return Currency
+     */
+    public function getCurrency(): ?Currency
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param Currency $currency
+     */
+    public function setCurrency(Currency $currency)
+    {
+        $this->currency = $currency;
     }
 }
 

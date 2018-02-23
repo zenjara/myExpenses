@@ -12,3 +12,9 @@ services:
         class: AppBundle\Factory\ExpenseViewFactory
     app.profile_view_factory:
         class: AppBundle\Factory\ProfileViewFactory
+    app.validator.currency_exists:
+        class: AppBundle\Validator\Constraints\CurrencyExistsValidator
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: validator.constraint_validator, alias: app.validator.currency_exists }
+
