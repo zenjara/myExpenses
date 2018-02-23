@@ -1,0 +1,19 @@
+AppBundle\Entity\ExpenseCategory:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ExpenseCategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    oneToMany:
+        expenses:
+            targetEntity: Expense
+            mappedBy: expenseCategory

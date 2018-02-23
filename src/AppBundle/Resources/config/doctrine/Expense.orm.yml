@@ -1,0 +1,41 @@
+AppBundle\Entity\Expense:
+    type: entity
+    table: expense
+    repositoryClass: AppBundle\Repository\ExpenseRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        amount:
+            type: float
+        description:
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+    lifecycleCallbacks: {  }
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: expenses
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        expenseCategory:
+            targetEntity: ExpenseCategory
+            inversedBy: expenses
+            joinColumn:
+                name: expenseCategory_id
+                referencedColumnName: id
+        currency:
+            targetEntity: Currency
+            inversedBy: expenses
+            joinColumn:
+                name: currency_id
+                referencedColumnName: id
