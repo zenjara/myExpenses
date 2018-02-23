@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use FOS\RestBundle\Controller\FOSRestController;
 
 class ProfileController extends FOSRestController
@@ -11,13 +12,8 @@ class ProfileController extends FOSRestController
         /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-//        $data = [];
-//
-//        $expenses = $user->getExpenses();
-//        foreach ($expenses as $expense){
-//            $data[]= $this->get('app.expense_view_factory')->create($expense);
-//        }
-        $view = $this->view($user, 200);
+        $userView = $this->get('app.profile_view_factory')->create($user);
+        $view = $this->view($userView, 200);
 
         return $this->handleView($view);
     }

@@ -10,3 +10,5 @@ services:
         class: AppBundle\Factory\ValidationErrorViewFactory
     app.expense_view_factory:
         class: AppBundle\Factory\ExpenseViewFactory
+    app.profile_view_factory:
+        class: AppBundle\Factory\ProfileViewFactory
