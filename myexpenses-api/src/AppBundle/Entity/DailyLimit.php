@@ -59,7 +59,7 @@ class DailyLimit
     /**
      * @return Currency
      */
-    public function getCurrency(): ?Currency
+    public function getCurrency()
     {
         return $this->currency;
     }
