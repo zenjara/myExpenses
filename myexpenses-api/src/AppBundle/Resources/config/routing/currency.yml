@@ -1,0 +1,5 @@
+api_get_currencies:
+    path: /currencies
+    methods: [GET]
+    defaults : { _controller: AppBundle:Currency:getCurrencies }
+

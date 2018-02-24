@@ -1,0 +1,4 @@
+api_get_expense_categories:
+    path: /expense-categories
+    methods: [GET]
+    defaults: { _controller: AppBundle:ExpenseCategory:getExpenseCategories }
