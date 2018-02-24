@@ -1,0 +1,9 @@
+AppBundle\Request\SetLimitRequest:
+    properties:
+        currencyId:
+            - NotBlank: ~
+            - NotNull: ~
+            - AppBundle\Validator\Constraints\CurrencyExists: ~
+        amount:
+            - NotBlank: ~
+            - NotNull: ~

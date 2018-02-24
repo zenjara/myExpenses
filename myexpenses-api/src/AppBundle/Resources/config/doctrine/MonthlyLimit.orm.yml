@@ -12,3 +12,9 @@ AppBundle\Entity\MonthlyLimit:
         amount:
             type: float
     lifecycleCallbacks: {  }
+    oneToOne:
+        currency:
+            targetEntity: Currency
+            joinColumn:
+                name: currency_id
+                referencedColumnName: id

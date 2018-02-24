@@ -14,11 +14,13 @@ AppBundle\Entity\User:
     oneToOne:
         dailyLimit:
             targetEntity: DailyLimit
+            cascade: ["persist","remove"]
             joinColumn:
                 name: daily_limit_id
                 referencedColumnName: id
         monthlyLimit:
             targetEntity: MonthlyLimit
+            cascade: ["persist","remove"]
             joinColumn:
                 name: monthly_limit_id
                 referencedColumnName: id
