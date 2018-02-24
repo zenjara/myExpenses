@@ -3,9 +3,11 @@ AppBundle\Request\NewExpenseRequest:
         expenseCategoryId:
             - NotBlank: ~
             - NotNull: ~
+            - AppBundle\Validator\Constraints\ExpenseCategoryExists: ~
         currencyId:
             - NotBlank: ~
             - NotNull: ~
+            - AppBundle\Validator\Constraints\CurrencyExists: ~
         amount:
             - NotBlank: ~
             - NotNull: ~

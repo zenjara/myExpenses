@@ -3,3 +3,4 @@ AppBundle\Request\GetSingleExpenseRequest:
         expenseId:
             - NotBlank: ~
             - NotNull: ~
+            - AppBundle\Validator\Constraints\ExpenseExists: ~

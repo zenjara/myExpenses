@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class CurrencyExistsValidator extends ConstraintValidator
+class ExpenseExistsValidator extends ConstraintValidator
 {
     /**
      * @var EntityManager
@@ -18,11 +18,11 @@ class CurrencyExistsValidator extends ConstraintValidator
         $this->em = $em;
     }
 
-    public function validate($currencyId, Constraint $constraint)
+    public function validate($expenseId, Constraint $constraint)
     {
-        $currency = $this->em->getRepository('AppBundle:Currency')->findOneById($currencyId);
+        $expense = $this->em->getRepository('AppBundle:Expense')->findOneById($expenseId);
 
-        if ($currency){
+        if ($expense) {
             return;
         }
 
