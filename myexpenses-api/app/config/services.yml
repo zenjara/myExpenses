@@ -12,6 +12,10 @@ services:
         class: AppBundle\Factory\ExpenseViewFactory
     app.profile_view_factory:
         class: AppBundle\Factory\ProfileViewFactory
+    app.currency_view_factory:
+        class: AppBundle\Factory\CurrencyViewFactory
+    app.expense_category_view_factory:
+        class: AppBundle\Factory\ExpenseCategoryViewFactory
     app.validator.currency_exists:
         class: AppBundle\Validator\Constraints\CurrencyExistsValidator
         arguments: ["@doctrine.orm.entity_manager"]
