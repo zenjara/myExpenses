@@ -5,7 +5,7 @@ import {
     RESET_LOGGING_USER
 } from "../actions/types";
 
-export default function(state = {}, action) {
+export default function(state = { authenticated: false }, action) {
     switch(action.type) {
         case AUTH_USER:
             return { ...state, authenticated: true };
