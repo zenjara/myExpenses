@@ -17,3 +17,6 @@ myexpenses-api/vendor/
 myexpenses-api/web/bundles/
 myexpenses-api/.idea
 myexpenses-api/.idea/
+
+**/.DS_STORE
+**/.idea
