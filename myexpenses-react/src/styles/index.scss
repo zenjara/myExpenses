@@ -4,4 +4,9 @@
 body {
     background: #f0f0f0;
     font-family: Roboto, sans-serif;
+
+    &.body--auth {
+        background-color: #00BCD4;
+    }
+
 }
