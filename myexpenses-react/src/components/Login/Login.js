@@ -70,6 +70,9 @@ class Login extends Component {
 
         return (
             <div className="auth-wrapper">
+                <div className="logo">
+                    <h1>myExpenses</h1>
+                </div>
                 <Card className="auth-card">
                     <CardHeader
                         title="Login"
