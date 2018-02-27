@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
@@ -23,8 +22,15 @@ if(accessToken) {
     store.dispatch({ type: AUTH_USER });
 }
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#32c787',
+        accent1Color: '#FF6E40'
+    }
+});
+
 ReactDOM.render(
-    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+    <MuiThemeProvider muiTheme={muiTheme}>
         <Provider store={store}>
             <Router>
                 <App />
