@@ -1,6 +1,8 @@
 parameters:
     app.view.validation_error.class:
         class: AppBundle\View\ValidationErrorView
+    app.view.page.class: AppBundle\View\PageView
+    app.view.page_links.class: AppBundle\View\PageLinksView
 
 services:
     app.validation_error_view_factory:
@@ -13,6 +15,18 @@ services:
         class: AppBundle\Factory\CurrencyViewFactory
     app.expense_category_view_factory:
         class: AppBundle\Factory\ExpenseCategoryViewFactory
+    app.page_view_factory:
+        class: AppBundle\Factory\PageViewFactory
+        arguments:
+            - "@router"
+            - "%app.view.page.class%"
+            - "%app.view.page_links.class%"
+    app.expense_catalog_view_factory:
+        class: AppBundle\Factory\ExpenseCatalogViewFactory
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@app.expense_view_factory"
+            - "@app.page_view_factory"
 
 #    VALIDATORS
     app.validator.currency_exists:

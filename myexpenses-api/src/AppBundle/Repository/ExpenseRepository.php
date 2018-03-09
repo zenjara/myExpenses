@@ -23,4 +23,12 @@ class ExpenseRepository extends \Doctrine\ORM\EntityRepository
         $this->_em->remove($expense);
         $this->_em->flush();
     }
+
+    public function findAllByUserQueryBuilder($user)
+    {
+        return $this->createQueryBuilder('expense')
+            ->where('expense.user =:user')
+            ->setParameter('user', $user)
+            ;
+    }
 }

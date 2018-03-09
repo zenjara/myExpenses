@@ -1,0 +1,7 @@
+AppBundle\Entity\Currency:
+    currency_kuna:
+        name: Hrvatska Kuna
+        code: kn
+    currency_euro:
+        name: Euro
+        code: eur
