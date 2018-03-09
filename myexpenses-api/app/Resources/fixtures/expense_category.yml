@@ -1,0 +1,9 @@
+AppBundle\Entity\ExpenseCategory:
+    expense_category1:
+        name: Food
+    expense_category2:
+        name: Bills
+    expense_category3:
+        name: Night Life
+    expense_category4:
+        name: Presents

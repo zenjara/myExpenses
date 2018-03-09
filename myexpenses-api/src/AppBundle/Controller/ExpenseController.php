@@ -6,24 +6,25 @@ use AppBundle\Entity\Expense;
 use AppBundle\Entity\User;
 use AppBundle\Request\GetSingleExpenseRequest;
 use AppBundle\Request\NewExpenseRequest;
+use AppBundle\Utils\PaginatorDetails;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExpenseController extends FOSRestController
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $data = [];
+        $pageView = $this->get('app.expense_catalog_view_factory')
+            ->listAllExpensesPaginated(
+                $user,
+                new PaginatorDetails($request->attributes->get('_route'), $request->query->all())
+            );
 
-        $expenses = $user->getExpenses();
-        foreach ($expenses as $expense){
-           $data[]= $this->get('app.expense_view_factory')->create($expense);
-        }
-        $view = $this->view($data, 200);
+        $view = $this->view($pageView, 200);
 
         return $this->handleView($view);
     }
