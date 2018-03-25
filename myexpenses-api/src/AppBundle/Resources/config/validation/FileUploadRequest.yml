@@ -1,0 +1,7 @@
+AppBundle\Request\FileUploadRequest:
+    properties:
+        uploadedFile:
+            - NotBlank: ~
+            - File:
+                mimeTypes: [application/*]
+                mimeTypesMessage: Please upload a valid file type

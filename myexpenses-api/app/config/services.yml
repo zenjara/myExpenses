@@ -27,6 +27,10 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@app.expense_view_factory"
             - "@app.page_view_factory"
+    app.expenses_excel_parser:
+        class: AppBundle\Utils\ExpensesExcelParser
+        arguments:
+            - "@doctrine.orm.entity_manager"
 
 #    VALIDATORS
     app.validator.currency_exists:

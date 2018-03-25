@@ -6,3 +6,8 @@ app_currency:
     resource: 'routing/currency.yml'
 app_expense_category:
     resource: 'routing/expense_category.yml'
+
+app_excel_upload:
+     path: /excel/upload
+     methods: POST
+     defaults: { _controller: AppBundle:Excel:upload }
