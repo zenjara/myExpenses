@@ -15,45 +15,11 @@
         padding: 0 26px;
         position: fixed;
         background-color: #32c787;
+        box-shadow: 0 1px 10px rgba(#000, .2);
 
         .header-title {
             color: #fff;
             font-size: 24px;
-        }
-
-    }
-
-    .main-app__sidebar {
-        padding: 72px 20px 0 20px;
-        color: #707070;
-
-        .sidebar-wrapper {
-            height: 100%;
-            padding: 35px 20px;
-
-            ul {
-                padding: 0;
-                list-style-type: none;
-
-                a {
-                    display: flex;
-                    align-items: center;
-                    border-radius: 2px;
-                    padding: 14px 11px;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: rgba(#000, .03);
-                    }
-
-                    i {
-                        margin-right: 12px;
-                    }
-
-                }
-
-            }
-
         }
 
     }
