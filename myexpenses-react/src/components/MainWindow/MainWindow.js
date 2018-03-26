@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 // import { connect } from 'react-redux';
 
 import UserInfo from '../UserInfo';
+import Expenses from '../Expenses';
 
 class MainWindow extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class MainWindow extends Component {
         return (
             <div className="main-app__window">
                 <Switch>
-                    <Route path='/me' component={UserInfo} />,
+                    <Route path='/me' component={UserInfo} />
+                    <Route path='/expenses' component={Expenses} />
                 </Switch>
             </div>
         );

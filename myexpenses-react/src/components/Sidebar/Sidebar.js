@@ -25,7 +25,7 @@ class Sidebar extends Component {
                                 <NavLink exact to='/' activeClassName="selected"><i className="zmdi zmdi-view-dashboard zmdi-hc-lg"></i> Dashboard</NavLink>
                             </li>
                             <li>
-                                <a><i className="zmdi zmdi-money-box zmdi-hc-lg"></i> Expenses</a>
+                                <NavLink to='/expenses' activeClassName="selected"><i className="zmdi zmdi-money-box zmdi-hc-lg"></i> Expenses</NavLink>
                             </li>
                             <li>
                                 <NavLink to='/me' activeClassName="selected"><i className="zmdi zmdi-account zmdi-hc-lg"></i> Profile</NavLink>
