@@ -9,12 +9,12 @@ class App extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/' render={props => (
-                    this.props.authenticated ? <Main {...props} /> : <Redirect to='/login' />
-                )} />,
                 <Route path='/login' render={props => (
                     this.props.authenticated ? <Redirect to='/' /> : <Login {...props} />
                 )} />
+                <Route path='/' render={props => (
+                    this.props.authenticated ? <Main {...props} /> : <Redirect to='/login' />
+                )} />,
             </Switch>
         );
     }

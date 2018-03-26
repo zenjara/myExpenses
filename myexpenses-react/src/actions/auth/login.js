@@ -8,7 +8,7 @@ import {
     RESET_LOGGING_USER
 } from "../types";
 
-export function userLogin({ email, password }, history) {
+export function userLogin({ email, password }) {
     return function(dispatch) {
         const userData = { _username: email, _password: password };
 
@@ -16,14 +16,19 @@ export function userLogin({ email, password }, history) {
         dispatch({ type: LOGGING_USER });
         axios.post('http://159.89.190.11/api/login_check', userData)
             .then(response => {
-                console.log(response);
                 LocalStorage.setAccessToken(response.data.token);
                 dispatch({ type: RESET_LOGGING_USER });
                 dispatch({ type: AUTH_USER });
-                // history.push('/');
             })
             .catch(error => {
                console.log(error);
             });
+    };
+}
+
+export function userLogout() {
+    LocalStorage.clearToken();
+    return {
+        type: UNAUTH_USER
     };
 }

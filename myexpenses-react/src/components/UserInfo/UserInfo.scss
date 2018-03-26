@@ -1,0 +1,57 @@
+.main-window__user-info {
+    padding: 20px;
+
+    .user-info__header {
+        margin-top: 0;
+        color: #999;
+    }
+
+    .user-info__content {
+
+        .info-card {
+            width: 480px;
+            padding: 24px;
+        }
+
+        .user-basics {
+
+            h3 {
+                margin: 0;
+                color: #333;
+                font-size: 32px;
+            }
+
+            p {
+                margin: 0;
+                color: #999;
+                font-size: 16px;
+            }
+        }
+
+        hr {
+            border-bottom: 0px;
+        }
+
+        .user-limits {
+            display: flex;
+            margin-top: 18px;
+
+            .user-limit {
+                flex-grow: 1;
+
+                .limit-header {
+                    color: #333;
+                }
+
+                .limit-body {
+                    color: #999;
+                    font-size: 32px;
+                }
+
+            }
+
+        }
+
+    }
+
+}

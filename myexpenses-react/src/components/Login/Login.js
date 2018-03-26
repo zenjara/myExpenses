@@ -15,7 +15,6 @@ class Login extends Component {
         super(props);
 
         this.handleRegisterClick = this.handleRegisterClick.bind(this);
-        this.handleLoginClick = this.handleLoginClick.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.renderEmailField = this.renderEmailField.bind(this);
         this.renderPasswordField = this.renderPasswordField.bind(this);
@@ -33,12 +32,8 @@ class Login extends Component {
         console.log('Register clicked!');
     }
 
-    handleLoginClick() {
-        console.log('Login clicked!');
-    }
-
     handleFormSubmit(values) {
-        this.props.userLogin(values, this.props.history);
+        this.props.userLogin(values);
     }
 
     renderEmailField(field) {
