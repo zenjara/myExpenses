@@ -21,7 +21,8 @@ class ExpenseController extends FOSRestController
         $pageView = $this->get('app.expense_catalog_view_factory')
             ->listAllExpensesPaginated(
                 $user,
-                new PaginatorDetails($request->attributes->get('_route'), $request->query->all())
+                new PaginatorDetails($request->attributes->get('_route'), $request->query->all()),
+                $request->query->get('sorting')
             );
 
         $view = $this->view($pageView, 200);
@@ -43,7 +44,9 @@ class ExpenseController extends FOSRestController
             return $this->view($validationErrorViewFactory->create($validationResults), Response::HTTP_BAD_REQUEST);
         }
 
-        $view = $this->view($this->handleNewExpense($newExpenseRequest, $user), Response::HTTP_CREATED);
+        $expense = $this->handleNewExpense($newExpenseRequest, $user);
+        $expenseView = $this->get('app.expense_view_factory')->create($expense);
+        $view = $this->view($expenseView, Response::HTTP_CREATED);
 
         return $this->handleView($view);
 
@@ -60,7 +63,9 @@ class ExpenseController extends FOSRestController
             return $this->view($validationErrorViewFactory->create($validationResults), Response::HTTP_BAD_REQUEST);
         }
 
-        $view = $this->view($this->handleShowExpense($getSingleExpenseRequest), Response::HTTP_OK);
+        $expense = $this->handleShowExpense($getSingleExpenseRequest);
+        $expenseView = $this->get('app.expense_view_factory')->create($expense);
+        $view = $this->view($expenseView, Response::HTTP_OK);
 
         return $this->handleView($view);
     }
