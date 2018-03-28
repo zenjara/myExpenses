@@ -45,7 +45,7 @@ class ExpenseRepository extends EntityRepository
      * @param QueryBuilder $queryBuilder
      * @param array $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = []): void
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {
             if (!in_array($property, array_merge($this->_class->getAssociationNames(), $this->_class->getFieldNames()), true)) {
