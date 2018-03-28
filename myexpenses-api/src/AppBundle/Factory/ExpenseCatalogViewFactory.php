@@ -30,9 +30,9 @@ class ExpenseCatalogViewFactory
         $this->pageViewFactory = $pageViewFactory;
     }
 
-    public function listAllExpensesPaginated(User $user, paginatorDetails $paginatorDetails)
+    public function listAllExpensesPaginated(User $user, paginatorDetails $paginatorDetails, ?array $sorting)
     {
-        $qb = $this->em->getRepository("AppBundle:Expense")->findAllByUserQueryBuilder($user);
+        $qb = $this->em->getRepository("AppBundle:Expense")->findAllByUserQueryBuilder($user, $sorting);
 
         $pagerfanta = new Pagerfanta(new DoctrineORMAdapter($qb));
         $pagerfanta->setMaxPerPage($paginatorDetails->limit());
