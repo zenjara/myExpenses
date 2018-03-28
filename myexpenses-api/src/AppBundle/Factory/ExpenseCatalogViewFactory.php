@@ -30,7 +30,7 @@ class ExpenseCatalogViewFactory
         $this->pageViewFactory = $pageViewFactory;
     }
 
-    public function listAllExpensesPaginated(User $user, paginatorDetails $paginatorDetails, ?array $sorting)
+    public function listAllExpensesPaginated(User $user, paginatorDetails $paginatorDetails, $sorting)
     {
         $qb = $this->em->getRepository("AppBundle:Expense")->findAllByUserQueryBuilder($user, $sorting);
 
