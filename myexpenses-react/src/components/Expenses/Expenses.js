@@ -12,6 +12,7 @@ import {
 } from 'material-ui/Table';
 import ExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import CircularProgress from 'material-ui/CircularProgress';
+import { FormattedDate } from 'react-intl';
 
 class Expenses extends Component {
     constructor(props) {
@@ -32,13 +33,24 @@ class Expenses extends Component {
 
     renderTableRows() {
         return this.props.expenses.map((expense, index) => {
-            const { id, amount, description, expense_category, currency } = expense;
+            const { id, amount, description, expense_category, currency, created_at } = expense;
+            const itemDate = new Date(created_at);
+            const itemDateTime = `${itemDate.getHours()}:${itemDate.getMinutes()} - ${itemDate.getDate()}/${itemDate.getMonth()}/${itemDate.getFullYear()}`;
 
             return (
                 <TableRow key={id}>
                     <TableRowColumn>{++index}</TableRowColumn>
                     <TableRowColumn>{`${amount} ${currency.code}`}</TableRowColumn>
                     <TableRowColumn>{description}</TableRowColumn>
+                    <TableRowColumn>
+                        <FormattedDate
+                            value={itemDate}
+                            year='numeric'
+                            month='long'
+                            day='numeric'
+                            weekday='short'
+                        />
+                    </TableRowColumn>
                     <TableRowColumn>
                         <Chip>{expense_category.name}</Chip>
                     </TableRowColumn>
@@ -52,10 +64,11 @@ class Expenses extends Component {
             <Table selectable={false}>
                 <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                     <TableRow>
-                        <TableHeaderColumn>ID</TableHeaderColumn>
+                        <TableHeaderColumn>No</TableHeaderColumn>
                         <TableHeaderColumn>Amount</TableHeaderColumn>
                         <TableHeaderColumn>Description</TableHeaderColumn>
                         <TableHeaderColumn>Category</TableHeaderColumn>
+                        <TableHeaderColumn>Date & Time</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
                 <TableBody showRowHover={true} displayRowCheckbox={false}>
