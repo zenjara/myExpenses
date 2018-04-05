@@ -1,0 +1,37 @@
+.main-window__expenses {
+    padding: 20px;
+
+    .expenses__header {
+        display: flex;
+        align-items: center;
+        color: #999;
+        margin-bottom: 20px;
+
+        h2 {
+            margin: 0 10px 0 0;
+        }
+
+    }
+
+    .expenses__content {
+
+        .expenses__table {}
+
+        .expenses__expand-more {
+            margin-top: 8px;
+            text-align: center;
+
+            svg {
+                border-radius: 50%;
+
+                &:hover {
+                    background-color: rgba(#000, 0.2);
+                }
+
+            }
+
+        }
+
+    }
+
+}

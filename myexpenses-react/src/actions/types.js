@@ -6,3 +6,6 @@ export const RESET_LOGGING_USER = 'reset_logging_user';
 
 // User
 export const FETCH_USER = 'fetch_user';
+
+// Expenses
+export const FETCH_EXPENSES = 'fetch_expenses';
