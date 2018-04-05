@@ -7,10 +7,12 @@ import {
 export function fetchExpenses() {
     const token = LocalStorage.getAccessToken();
 
-    return function(dispatch) {
-        axios.get('http://159.89.190.11/api/expenses', { headers: { 'Authorization': `Bearer ${token}` } })
+    return function(dispatch, getState) {
+        const page = getState().expenses.nextPage;
+
+        axios.get(`http://159.89.190.11/api/expenses?page=${page}`, { headers: { 'Authorization': `Bearer ${token}` } })
             .then(response => {
-                dispatch({ type: FETCH_EXPENSES, payload: response.data.items });
+                dispatch({ type: FETCH_EXPENSES, payload: response.data });
             })
             .catch(error => {
                 console.log(error);
