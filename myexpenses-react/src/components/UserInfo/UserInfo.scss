@@ -31,13 +31,16 @@
         hr {
             border-bottom: 0px;
         }
-
-        .user-limits {
+        
+        .user-settings {
             display: flex;
             margin-top: 18px;
+        }
+
+        .user-limits {
 
             .user-limit {
-                flex-grow: 1;
+                margin: 10px 0;
 
                 .limit-header {
                     color: #333;
@@ -50,6 +53,15 @@
 
             }
 
+        }
+
+        .user-currency {
+
+        }
+
+        .user-info__card-actions {
+            display: flex;
+            justify-content: flex-end;
         }
 
     }
