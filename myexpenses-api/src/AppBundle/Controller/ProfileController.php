@@ -23,8 +23,8 @@ class ProfileController extends FOSRestController
         $response["id"]= $user->getId();
         $response["username"]= $user->getUsername();
         $response["email"]= $user->getEmail();
-        $response["dailyLimit"]= $user->getDailyLimit();
-        $response["monthlyLimit"]= $user->getMonthlyLimit();
+        $response["dailyLimit"]= $user->getDailyLimit() ?? null;
+        $response["monthlyLimit"]= $user->getMonthlyLimit() ?? null;
 
         return new JsonResponse($response,Response::HTTP_OK);
     }
