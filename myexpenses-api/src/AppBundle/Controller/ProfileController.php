@@ -18,8 +18,7 @@ class ProfileController extends FOSRestController
         /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $userView = $this->get('app.profile_view_factory')->create($user);
-//        $response = new Std;
+//        $userView = $this->get('app.profile_view_factory')->create($user);
         $response =[];
         $response["id"]= $user->getId();
         $response["username"]= $user->getUsername();
@@ -27,19 +26,7 @@ class ProfileController extends FOSRestController
         $response["dailyLimit"]= $user->getDailyLimit();
         $response["monthlyLimit"]= $user->getMonthlyLimit();
 
-//        $profileView->id = $user->getId();
-//        $profileView->username = $user->getUsername();
-//        $profileView->email = $user->getEmail();
-//        $profileView->dailyLimit = $user->getDailyLimit();
-//        $profileView->monthlyLimit = $user->getMonthlyLimit();
-
-        return new JsonResponse($response,200);
-        dump($response);
-//        dump(new JsonResponse(json_encode($response),200));
-        die();
-        $view = $this->view($userView, 200);
-
-        return $this->handleView($view);
+        return new JsonResponse($response,Response::HTTP_OK);
     }
 
     public function setDailyLimitAction(Request $request)
