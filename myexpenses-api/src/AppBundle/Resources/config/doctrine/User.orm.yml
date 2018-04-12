@@ -15,6 +15,7 @@ AppBundle\Entity\User:
         dailyLimit:
             targetEntity: DailyLimit
             cascade: ["persist","remove"]
+            fetch: EAGER
             joinColumn:
                 name: daily_limit_id
                 referencedColumnName: id

@@ -19,14 +19,29 @@ class ProfileController extends FOSRestController
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
 //        $userView = $this->get('app.profile_view_factory')->create($user);
-        $response =[];
-        $response["id"]= $user->getId();
-        $response["username"]= $user->getUsername();
-        $response["email"]= $user->getEmail();
-        $response["dailyLimit"]= $user->getDailyLimit() ?? null;
-        $response["monthlyLimit"]= $user->getMonthlyLimit() ?? null;
+        $response = [];
+        $response["id"] = $user->getId();
+        $response["username"] = $user->getUsername();
+        $response["email"] = $user->getEmail();
+        if ($user->getDailyLimit()) {
+            $response["dailyLimit"] = [
+                "amount" => $user->getDailyLimit()->getAmount(),
+                "currency" => $this->get('app.currency_view_factory')->create($user->getDailyLimit()->getCurrency())
+            ];
+        } else {
+            $response["dailyLimit"] = null;
+        }
 
-        return new JsonResponse($response,Response::HTTP_OK);
+        if ($user->getMonthlyLimit()    ) {
+            $response["monthlyLimit"] = [
+                "amount" => $user->getMonthlyLimit()->getAmount(),
+                "currency" => $this->get('app.currency_view_factory')->create($user->getMonthlyLimit()->getCurrency())
+            ];
+        } else {
+            $response["monthlyLimit"] = null;
+        }
+
+        return new JsonResponse($response, Response::HTTP_OK);
     }
 
     public function setDailyLimitAction(Request $request)
