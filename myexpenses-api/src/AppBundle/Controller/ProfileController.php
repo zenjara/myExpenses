@@ -7,6 +7,7 @@ use AppBundle\Entity\MonthlyLimit;
 use AppBundle\Entity\User;
 use AppBundle\Request\SetLimitRequest;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,6 +19,24 @@ class ProfileController extends FOSRestController
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $userView = $this->get('app.profile_view_factory')->create($user);
+//        $response = new Std;
+        $response =[];
+        $response["id"]= $user->getId();
+        $response["username"]= $user->getUsername();
+        $response["email"]= $user->getEmail();
+        $response["dailyLimit"]= $user->getDailyLimit();
+        $response["monthlyLimit"]= $user->getMonthlyLimit();
+
+//        $profileView->id = $user->getId();
+//        $profileView->username = $user->getUsername();
+//        $profileView->email = $user->getEmail();
+//        $profileView->dailyLimit = $user->getDailyLimit();
+//        $profileView->monthlyLimit = $user->getMonthlyLimit();
+
+        return new JsonResponse($response,200);
+        dump($response);
+//        dump(new JsonResponse(json_encode($response),200));
+        die();
         $view = $this->view($userView, 200);
 
         return $this->handleView($view);
