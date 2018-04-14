@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { setLimit } from "../../actions/users";
+import { setLimits } from "../../actions/users";
 
 class UserInfo extends Component {
     constructor(props) {
@@ -46,8 +46,7 @@ class UserInfo extends Component {
     }
 
     handleSubmitClick() {
-        this.props.setLimit(this.state.dailyLimit, 'daily');
-        // this.props.setLimit(this.state.monthlyLimit, 'monthly');
+        this.props.setLimits(this.state.dailyLimit, this.state.monthlyLimit);
     }
 
     handleChangeClick() {
@@ -135,4 +134,4 @@ function mapStateToProps({ user }) {
     };
 }
 
-export default connect(mapStateToProps, { setLimit })(UserInfo);
+export default connect(mapStateToProps, { setLimits })(UserInfo);

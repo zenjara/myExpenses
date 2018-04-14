@@ -19,19 +19,22 @@ export function fetchUser() {
     };
 }
 
-export function setLimit(limit, limitType) {
+export function setLimits(dailyLimit, monthlyLimit) {
     const token = LocalStorage.getAccessToken();
 
     // Hard-coded currencyId for now
-    const limitData = { amount: limit, currencyId: 1 };
+    const dailyData = { amount: dailyLimit, currencyId: 1 };
+    const monthlyData = { amount: monthlyLimit, currencyId: 1 };
 
     return function(dispatch) {
-        axios.post(`http://159.89.190.11/api/${limitType}-limit`, limitData, { headers: { 'Authorization': `Bearer ${token}`} })
-            .then(response => {
+        axios.all([setLimitRequest('daily', dailyData, token), setLimitRequest('monthly', monthlyData, token)])
+            .then(axios.spread(function (dailyResponse, monthlyResponse) {
+                // debugger
                 dispatch({ type: FETCH_LIMIT });
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            }));
     }
+}
+
+function setLimitRequest(limitType, limitData, token) {
+    return axios.post(`http://159.89.190.11/api/${limitType}-limit`, limitData, { headers: { 'Authorization': `Bearer ${token}`} });
 }
