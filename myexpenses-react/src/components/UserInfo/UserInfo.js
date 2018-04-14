@@ -21,11 +21,11 @@ class UserInfo extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.user) {
-            this.setState({ dailyLimit: nextProps.user.daily_limit, monthlyLimit: nextProps.user.monthly_limit })
+            console.log(nextProps.user.dailyLimit.amount);
+            this.setState({ dailyLimit: nextProps.user.dailyLimit.amount, monthlyLimit: nextProps.user.monthlyLimit.amount })
         }
 
         if(nextProps.limitSet) {
-            // debugger
             // TODO - set limits to response data
             this.setState({ cardEditable: false });
         }
@@ -40,8 +40,8 @@ class UserInfo extends Component {
     handleCancelClick() {
         this.setState({
             cardEditable: false,
-            dailyLimit: this.props.user.daily_limit,
-            monthlyLimit: this.props.user.monthly_limit
+            dailyLimit: this.props.user.dailyLimit.amount,
+            monthlyLimit: this.props.user.monthlyLimit.amount
         });
     }
 
@@ -68,6 +68,8 @@ class UserInfo extends Component {
     }
 
     render() {
+        const { dailyLimit, monthlyLimit } = this.props.user;
+
         return (
             <div className="main-window__user-info">
                 <h2 className="user-info__header">User info</h2>
@@ -87,7 +89,7 @@ class UserInfo extends Component {
                                             value={this.state.dailyLimit || '0'}
                                             onChange={this.handleLimitChange}
                                         /> :
-                                        <div className="limit-body">{this.props.user.daily_limit || '0'}</div>
+                                        <div className="limit-body">{dailyLimit ? dailyLimit.amount : '0'}</div>
                                     }
                                 </div>
                                 <div className="user-limit user-limit--monthly">
@@ -100,7 +102,7 @@ class UserInfo extends Component {
                                             value={this.state.monthlyLimit || '0'}
                                             onChange={this.handleLimitChange}
                                         /> :
-                                        <div className="limit-body">{this.props.user.monthly_limit || '0'}</div>
+                                        <div className="limit-body">{monthlyLimit ? monthlyLimit.amount : '0'}</div>
                                     }
                                 </div>
                             </div>

@@ -25,11 +25,6 @@ export function setLimit(limit, limitType) {
     // Hard-coded currencyId for now
     const limitData = { amount: limit, currencyId: 1 };
 
-    // Hard-coded currencyId for now
-    // let limitData = new URLSearchParams();
-    // limitData.append('amount', limit);
-    // limitData.append('currencyId', '1');
-
     return function(dispatch) {
         axios.post(`http://159.89.190.11/api/${limitType}-limit`, limitData, { headers: { 'Authorization': `Bearer ${token}`} })
             .then(response => {
