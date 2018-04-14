@@ -11,6 +11,3 @@ api_login_check:
 custom_routes:
     resource: '@AppBundle/Resources/config/routing.yml'
     prefix: /api
-#NelmioApiDocBundle:
-#    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
-#    prefix:   /api/doc

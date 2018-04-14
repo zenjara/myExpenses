@@ -2,12 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Currency;
 use AppBundle\Entity\Expense;
 use AppBundle\Entity\User;
 use AppBundle\Request\GetSingleExpenseRequest;
 use AppBundle\Request\NewExpenseRequest;
 use AppBundle\Utils\PaginatorDetails;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -86,6 +88,30 @@ class ExpenseController extends FOSRestController
         $view = $this->view($this->handleRemoveExpense($getSingleExpenseRequest, $user), Response::HTTP_NO_CONTENT);
 
         return $this->handleView($view);
+    }
+
+    public function currentExpensesAction(Request $request)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $currencyCode = $request->query->get('currencyCode') ?? "kn";
+        $currency = $this->getDoctrine()->getRepository(Currency::class)->findOneByCode($currencyCode);
+
+        $expensesDailyTotal = $this->getDoctrine()->getRepository(Expense::class)->findDailyTotalByCurrency($currency, $user);
+        $expensesMonthlyTotal = $this->getDoctrine()->getRepository(Expense::class)->findMonthlyTotalByCurrency($currency, $user);
+
+        $response = [
+            "expensesDailyTotal" => [
+                "amount" => $expensesDailyTotal,
+                "currency" => $currencyCode,
+            ],
+            "expensesMonthlyTotal" => [
+                "amount" => $expensesMonthlyTotal,
+                "currency" => $currencyCode,
+            ],
+        ];
+
+        return new JsonResponse($response, Response::HTTP_OK);
     }
 
     private function handleNewExpense(NewExpenseRequest $newExpenseRequest, $user)

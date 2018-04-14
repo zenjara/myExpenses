@@ -11,3 +11,8 @@ app_excel_upload:
      path: /excel/upload
      methods: POST
      defaults: { _controller: AppBundle:Excel:upload }
+
+app_current_spending:
+     path: /current-expenses
+     methods: GET
+     defaults: { _controller: AppBundle:Expense:currentExpenses }
