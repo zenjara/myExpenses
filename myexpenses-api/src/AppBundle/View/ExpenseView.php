@@ -12,7 +12,7 @@ class ExpenseView
     public $id;
 
     /**
-     * @var int
+     * @var float|int
      */
     public $amount;
 

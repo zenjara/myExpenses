@@ -71,4 +71,40 @@ class ExpenseRepository extends EntityRepository
 
         return $name;
     }
+
+    public function findDailyTotalByCurrency($currency, $user)
+    {
+        $startOfToday = new \DateTime("today");
+        $endOfToday = (new \DateTime("today"))->setTime("23", "59", "59");
+
+        return $this->createQueryBuilder('expense')
+            ->where('expense.createdAt BETWEEN :todayStart AND :todayEnd')
+            ->andWhere('expense.currency =:currency')
+            ->andWhere('expense.user =:user')
+            ->setParameter('todayStart', $startOfToday)
+            ->setParameter('todayEnd', $endOfToday)
+            ->setParameter('currency', $currency)
+            ->setParameter('user', $user)
+            ->select('SUM(expense.amount) as amount')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findMonthlyTotalByCurrency($currency, $user)
+    {
+        $firstDayOfMonth = new \DateTime('first day of this month');
+        $lastDayOfMonth = (new \DateTime('last day of this month'))->setTime("23", "59", "59");
+
+        return $this->createQueryBuilder('expense')
+            ->where('expense.createdAt BETWEEN :firstDay AND :lastDay')
+            ->andWhere('expense.currency =:currency')
+            ->andWhere('expense.user =:user')
+            ->setParameter('firstDay', $firstDayOfMonth)
+            ->setParameter('lastDay', $lastDayOfMonth)
+            ->setParameter('currency', $currency)
+            ->setParameter('user', $user)
+            ->select('SUM(expense.amount) as amount')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

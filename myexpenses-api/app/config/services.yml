@@ -9,6 +9,8 @@ services:
         class: AppBundle\Factory\ValidationErrorViewFactory
     app.expense_view_factory:
         class: AppBundle\Factory\ExpenseViewFactory
+    app.limit_view_factory:
+        class: AppBundle\Factory\LimitViewFactory
     app.profile_view_factory:
         class: AppBundle\Factory\ProfileViewFactory
     app.currency_view_factory:

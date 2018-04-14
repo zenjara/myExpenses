@@ -32,7 +32,7 @@ class ProfileController extends FOSRestController
             $response["dailyLimit"] = null;
         }
 
-        if ($user->getMonthlyLimit()    ) {
+        if ($user->getMonthlyLimit()) {
             $response["monthlyLimit"] = [
                 "amount" => $user->getMonthlyLimit()->getAmount(),
                 "currency" => $this->get('app.currency_view_factory')->create($user->getMonthlyLimit()->getCurrency())
@@ -64,7 +64,9 @@ class ProfileController extends FOSRestController
         $this->getDoctrine()->getManager()->persist($user);
         $this->getDoctrine()->getManager()->flush();
 
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
+        $dailyLimitView = $this->get('app.limit_view_factory')->create($dailyLimit);
+
+        $view = $this->view($dailyLimitView, Response::HTTP_CREATED);
 
         return $this->handleView($view);
     }
@@ -89,7 +91,9 @@ class ProfileController extends FOSRestController
         $this->getDoctrine()->getManager()->persist($user);
         $this->getDoctrine()->getManager()->flush();
 
-        $view = $this->view(null, Response::HTTP_NO_CONTENT);
+        $monthlyLimitView = $this->get('app.limit_view_factory')->create($monthlyLimit);
+
+        $view = $this->view($monthlyLimitView, Response::HTTP_CREATED);
 
         return $this->handleView($view);
     }
