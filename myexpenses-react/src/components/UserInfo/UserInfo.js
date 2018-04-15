@@ -134,6 +134,7 @@ class UserInfo extends Component {
                                         value={this.state.currentCurrency}
                                         onChange={this.handleSelectChange}
                                     >
+                                        {/*TODO - sredi vamo*/}
                                         { Object.keys(currencies).map(id => {
                                             const currency = currencies[id];
                                             return <MenuItem value={currency.id} label={currency.code} primaryText={`${currency.name}: ${currency.code}`} key={currency.id} />
