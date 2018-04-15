@@ -2,7 +2,7 @@ import axios from 'axios';
 import LocalStorage from '../utils/localStorage';
 import {
     FETCH_USER,
-    FETCH_LIMIT
+    FETCH_LIMIT, FETCH_CURRENCY
 } from './types';
 
 export function fetchUser() {
@@ -17,6 +17,19 @@ export function fetchUser() {
                 console.log(error);
             });
     };
+}
+
+export function fetchCurrencies() {
+    const token = LocalStorage.getAccessToken();
+    return function(dispatch) {
+        axios.get('http://159.89.190.11/api/currencies', { headers: { 'Authorization': `Bearer ${token}` } })
+            .then(response => {
+                dispatch({ type: FETCH_CURRENCY, payload: response.data });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 }
 
 export function setLimits(dailyLimit, monthlyLimit) {

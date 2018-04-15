@@ -12,3 +12,6 @@ export const FETCH_LIMIT = 'fetch_limit';
 
 // Expenses
 export const FETCH_EXPENSES = 'fetch_expenses';
+
+// Currency
+export const FETCH_CURRENCY = 'fetch_currency';

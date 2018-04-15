@@ -5,6 +5,8 @@ import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 import { setLimits } from "../../actions/users";
 
@@ -12,16 +14,29 @@ class UserInfo extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { cardEditable: false, dailyLimit: 0, monthlyLimit: 0 };
+        const { daily, monthly } = props.user;
+
+        this.state = { cardEditable: false, dailyLimit: daily || 0, monthlyLimit: monthly || 0, currenyCurrency: null };
         this.handleChangeClick = this.handleChangeClick.bind(this);
         this.handleCancelClick = this.handleCancelClick.bind(this);
         this.handleSubmitClick = this.handleSubmitClick.bind(this);
         this.handleLimitChange = this.handleLimitChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+    }
+
+    componentDidMount() {
+        if(Object.keys(this.props.user).length) {
+            const { dailyLimit, monthlyLimit } = this.props.user;
+
+            this.setState({
+                dailyLimit: dailyLimit.amount,
+                monthlyLimit: monthlyLimit.amount
+            });
+        }
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.user) {
-            console.log(nextProps.user.dailyLimit.amount);
             this.setState({ dailyLimit: nextProps.user.dailyLimit.amount, monthlyLimit: nextProps.user.monthlyLimit.amount })
         }
 
@@ -41,7 +56,8 @@ class UserInfo extends Component {
         this.setState({
             cardEditable: false,
             dailyLimit: this.props.user.dailyLimit.amount,
-            monthlyLimit: this.props.user.monthlyLimit.amount
+            monthlyLimit: this.props.user.monthlyLimit.amount,
+            currentCurrency: this.props.user.dailyLimit.currency.id
         });
     }
 
@@ -51,6 +67,10 @@ class UserInfo extends Component {
 
     handleChangeClick() {
         this.setState({ cardEditable: true });
+    }
+
+    handleSelectChange() {
+
     }
 
     renderUserBasics() {
@@ -68,6 +88,7 @@ class UserInfo extends Component {
 
     render() {
         const { dailyLimit, monthlyLimit } = this.props.user;
+        const { currencies } = this.props;
 
         return (
             <div className="main-window__user-info">
@@ -106,7 +127,21 @@ class UserInfo extends Component {
                                 </div>
                             </div>
                             <div className="user-currency">
-
+                                <div>Currency:</div>
+                                { this.state.cardEditable && Object.keys(currencies).length ?
+                                    <SelectField
+                                        id="currency"
+                                        value={this.state.currentCurrency}
+                                        onChange={this.handleSelectChange}
+                                    >
+                                        { Object.keys(currencies).map(id => {
+                                            const currency = currencies[id];
+                                            return <MenuItem value={currency.id} label={currency.code} primaryText={`${currency.name}: ${currency.code}`} key={currency.id} />
+                                        })}
+                                    </SelectField>
+                                        :
+                                    <div className="limit-body">{ this.props.user.dailyLimit ? this.props.user.dailyLimit.currency.code : null}</div>
+                                }
                             </div>
                         </div>
                         <div className="user-info__card-actions">
@@ -127,10 +162,11 @@ class UserInfo extends Component {
     }
 }
 
-function mapStateToProps({ user }) {
+function mapStateToProps({ user, currencies }) {
     return {
         user: user.user,
-        limitSet: user.limitSet
+        limitSet: user.limitSet,
+        currencies: currencies
     };
 }
 

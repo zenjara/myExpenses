@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/users';
+import { fetchCurrencies } from '../../actions/users';
 
 import Sidebar from '../Sidebar';
 import MainWindow from '../MainWindow';
@@ -12,6 +13,7 @@ class Main extends Component {
 
     componentDidMount() {
         this.props.fetchUser();
+        this.props.fetchCurrencies();
     }
 
     render() {
@@ -27,4 +29,4 @@ class Main extends Component {
     }
 }
 
-export default connect(null, { fetchUser })(Main);
+export default connect(null, { fetchUser, fetchCurrencies })(Main);
