@@ -36,14 +36,16 @@ class UserInfo extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.user) {
-            this.setState({ dailyLimit: nextProps.user.dailyLimit.amount, monthlyLimit: nextProps.user.monthlyLimit.amount })
+        if(nextProps.limits) {
+            debugger
+
+            this.setState({
+                dailyLimit: nextProps.limits.dailyLimit,
+                monthlyLimit: nextProps.limits.monthlyLimit,
+                cardEditable: false
+            });
         }
 
-        if(nextProps.limitSet) {
-            // TODO - set limits to response data
-            this.setState({ cardEditable: false });
-        }
     }
 
     handleLimitChange(e) {
@@ -55,8 +57,8 @@ class UserInfo extends Component {
     handleCancelClick() {
         this.setState({
             cardEditable: false,
-            dailyLimit: this.props.user.dailyLimit.amount,
-            monthlyLimit: this.props.user.monthlyLimit.amount,
+            dailyLimit: this.props.limits.dailyLimit,
+            monthlyLimit: this.props.limits.monthlyLimit,
             currentCurrency: this.props.user.dailyLimit.currency.id
         });
     }
@@ -87,7 +89,7 @@ class UserInfo extends Component {
     }
 
     render() {
-        const { dailyLimit, monthlyLimit } = this.props.user;
+        const { dailyLimit, monthlyLimit } = this.props.limits;
         const { currencies } = this.props;
 
         return (
@@ -109,7 +111,7 @@ class UserInfo extends Component {
                                             value={this.state.dailyLimit || '0'}
                                             onChange={this.handleLimitChange}
                                         /> :
-                                        <div className="limit-body">{dailyLimit ? dailyLimit.amount : '0'}</div>
+                                        <div className="limit-body">{dailyLimit ? dailyLimit : '0'}</div>
                                     }
                                 </div>
                                 <div className="user-limit user-limit--monthly">
@@ -122,19 +124,19 @@ class UserInfo extends Component {
                                             value={this.state.monthlyLimit || '0'}
                                             onChange={this.handleLimitChange}
                                         /> :
-                                        <div className="limit-body">{monthlyLimit ? monthlyLimit.amount : '0'}</div>
+                                        <div className="limit-body">{monthlyLimit ? monthlyLimit : '0'}</div>
                                     }
                                 </div>
                             </div>
                             <div className="user-currency">
                                 <div>Currency:</div>
-                                { this.state.cardEditable && Object.keys(currencies).length ?
+                                {/*TODO - sredi vamo*/}
+                                { false && this.state.cardEditable && Object.keys(currencies).length ?
                                     <SelectField
                                         id="currency"
                                         value={this.state.currentCurrency}
                                         onChange={this.handleSelectChange}
                                     >
-                                        {/*TODO - sredi vamo*/}
                                         { Object.keys(currencies).map(id => {
                                             const currency = currencies[id];
                                             return <MenuItem value={currency.id} label={currency.code} primaryText={`${currency.name}: ${currency.code}`} key={currency.id} />
@@ -163,11 +165,11 @@ class UserInfo extends Component {
     }
 }
 
-function mapStateToProps({ user, currencies }) {
+function mapStateToProps({ user, limits, currencies }) {
     return {
-        user: user.user,
-        limitSet: user.limitSet,
-        currencies: currencies
+        user,
+        limits,
+        currencies
     };
 }
 

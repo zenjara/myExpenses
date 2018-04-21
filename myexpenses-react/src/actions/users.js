@@ -2,7 +2,8 @@ import axios from 'axios';
 import LocalStorage from '../utils/localStorage';
 import {
     FETCH_USER,
-    FETCH_LIMIT, FETCH_CURRENCY
+    FETCH_LIMITS,
+    FETCH_CURRENCY
 } from './types';
 
 export function fetchUser() {
@@ -11,7 +12,11 @@ export function fetchUser() {
     return function(dispatch) {
         axios.get('http://159.89.190.11/api/me', { headers: { 'Authorization': `Bearer ${token}` } })
             .then(response => {
+                const dailyLimit = response.data.dailyLimit.amount;
+                const monthlyLimit = response.data.monthlyLimit.amount;
+
                 dispatch({ type: FETCH_USER, payload: response.data });
+                dispatch({ type: FETCH_LIMITS, payload: { dailyLimit, monthlyLimit } });
             })
             .catch(error => {
                 console.log(error);
@@ -42,8 +47,10 @@ export function setLimits(dailyLimit, monthlyLimit) {
     return function(dispatch) {
         axios.all([setLimitRequest('daily', dailyData, token), setLimitRequest('monthly', monthlyData, token)])
             .then(axios.spread(function (dailyResponse, monthlyResponse) {
-                // debugger
-                dispatch({ type: FETCH_LIMIT });
+                const dailyLimit = dailyResponse.data.amount;
+                const monthlyLimit = monthlyResponse.data.amount;
+
+                dispatch({ type: FETCH_LIMITS, payload: { dailyLimit, monthlyLimit } });
             }));
     }
 }

@@ -8,7 +8,7 @@ export const RESET_LOGGING_USER = 'reset_logging_user';
 export const FETCH_USER = 'fetch_user';
 
 // LIMITS
-export const FETCH_LIMIT = 'fetch_limit';
+export const FETCH_LIMITS = 'fetch_limits';
 
 // Expenses
 export const FETCH_EXPENSES = 'fetch_expenses';

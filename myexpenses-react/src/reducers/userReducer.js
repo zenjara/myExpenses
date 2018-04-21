@@ -1,15 +1,11 @@
 import {
-    FETCH_USER,
-    FETCH_LIMIT
+    FETCH_USER
 } from '../actions/types';
 
-export default function(state = { user: {}, limitSet: false }, action) {
+export default function(state = {}, action) {
     switch(action.type) {
         case FETCH_USER:
-            console.log('user fetched');
-            return { ...state, user: action.payload };
-        case FETCH_LIMIT:
-            return { ...state, limitSet: true };
+            return { ...state, ...action.payload };
         default:
             return state;
     }
