@@ -1,0 +1,16 @@
+.main-window__dashboard {
+    padding: 20px;
+
+    .dashboard__header {
+        display: flex;
+        align-items: center;
+        color: #999;
+        margin-bottom: 20px;
+
+        h2 {
+            margin: 0 10px 0 0;
+        }
+
+    }
+
+}
