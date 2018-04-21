@@ -37,8 +37,6 @@ class UserInfo extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.limits) {
-            debugger
-
             this.setState({
                 dailyLimit: nextProps.limits.dailyLimit,
                 monthlyLimit: nextProps.limits.monthlyLimit,
