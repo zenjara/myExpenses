@@ -7,6 +7,8 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Chip from 'material-ui/Chip';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 import {
     Table,
@@ -38,11 +40,12 @@ class Expenses extends Component {
     }
 
     handleFormSubmit(values) {
-        console.log(values);
         this.props.submitNewExpense(values);
     }
 
     renderAmountField(field) {
+        const { touched, error } = field.meta;
+
         return (
             <TextField
                 id="amount"
@@ -50,43 +53,63 @@ class Expenses extends Component {
                 hintText="Expense amount"
                 style={{ width: 'auto' }}
                 {...field.input}
+                errorText={touched && error}
             />
         );
     }
 
     renderExpenseCategoryField(field) {
+        const { categories } = field;
+        const { touched, error } = field.meta;
+
         return (
-            <TextField
+            <SelectField
                 id="expense_category"
-                type="text"
                 hintText="Expense category"
-                style={{ width: 'auto' }}
                 {...field.input}
-            />
+                errorText={touched && error}
+                onChange={(event, index, value) => field.input.onChange(value)}
+            >
+                { Object.keys(categories).map(id => {
+                    const category = categories[id];
+                    return <MenuItem value={category.id} primaryText={category.name} key={category.id} />
+                })}
+            </SelectField>
         );
     }
 
     renderCurrencyField(field) {
+        const { currencies } = field;
+        const { touched, error } = field.meta;
+
         return (
-            <TextField
+            <SelectField
                 id="currency"
-                type="text"
                 hintText="Expense currency"
-                style={{ width: 'auto' }}
                 {...field.input}
-            />
+                errorText={touched && error}
+                onChange={(event, index, value) => field.input.onChange(value)}
+            >
+                { Object.keys(currencies).map(id => {
+                    const currency = currencies[id];
+                    return <MenuItem value={currency.id} label={currency.code} primaryText={`${currency.name}: ${currency.code}`} key={currency.id} />
+                })}
+            </SelectField>
         );
     }
 
     renderDescriptionField(field) {
+        const { touched, error } = field.meta;
+
         return (
             <TextField
                 id="description"
                 type="text"
                 hintText="Expense description"
                 style={{ width: 'auto' }}
-                {...field.input}
                 fullWidth={true}
+                {...field.input}
+                errorText={touched && error}
             />
         );
     }
@@ -139,7 +162,7 @@ class Expenses extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, reset } = this.props;
 
         return (
             <div className="main-window__expenses">
@@ -148,8 +171,6 @@ class Expenses extends Component {
                     { this.props.expenses.length === 0 ? <CircularProgress size={20} thickness={3} /> : null }
                 </div>
                 <div className="expenses__content">
-                    {/*-------------*/}
-
                     <Card className="new-expense-card">
                         <CardHeader
                             title="New Expense"
@@ -170,10 +191,12 @@ class Expenses extends Component {
                                 <Field
                                     name="category"
                                     component={this.renderExpenseCategoryField}
+                                    categories={this.props.categories}
                                 />
                                 <Field
                                     name="currency"
                                     component={this.renderCurrencyField}
+                                    currencies={this.props.currencies}
                                 />
                                 <Field
                                     name="description"
@@ -186,15 +209,13 @@ class Expenses extends Component {
                                     justifyContent: 'flex-end'
                                 }}
                             >
-                                {   this.props.logging ?
+                                {   this.props.submittingExpense ?
                                     <CircularProgress /> :
                                     <FlatButton label="Submit" primary={true} type="submit" />
                                 }
                             </CardActions>
                         </form>
                     </Card>
-
-                    {/*-------------*/}
                     <div className="expenses__table">
                         {this.renderExpensesTable()}
                     </div>
@@ -217,7 +238,7 @@ function validate(values) {
     const errors = {};
 
     if(!values.amount) {
-        errors.email = 'Please enter an amount';
+        errors.amount = 'Please enter an amount';
     }
 
     if(!values.category) {
@@ -231,11 +252,14 @@ function validate(values) {
     return errors;
 }
 
-function mapStateToProps({ expenses }) {
+function mapStateToProps({ expenses, categories, currencies }) {
     return {
         expenses: expenses.expensesList,
         nextPage: expenses.nextPage,
-        pagesTotal: expenses.pagesTotal
+        pagesTotal: expenses.pagesTotal,
+        submittingExpense: expenses.submittingExpense,
+        categories,
+        currencies
     };
 }
 

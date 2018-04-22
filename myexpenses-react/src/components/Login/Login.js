@@ -129,8 +129,8 @@ function validate(values) {
     return errors;
 }
 
-function mapStateToProps(state) {
-    return { logging: state.auth.logging };
+function mapStateToProps({ auth }) {
+    return { logging: auth.logging };
 }
 
 export default reduxForm({
