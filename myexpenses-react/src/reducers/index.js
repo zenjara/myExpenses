@@ -4,6 +4,7 @@ import authReducer from './authReducer';
 import userReducer from './userReducer';
 import limitsReducer from './limitsReducer';
 import expensesReducer from './expensesReducer';
+import categoriesReducer from "./categoriesReducer";
 import currencyReducer from './currencyReducer';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     limits: limitsReducer,
     expenses: expensesReducer,
+    categories: categoriesReducer,
     currencies: currencyReducer
 });
 
