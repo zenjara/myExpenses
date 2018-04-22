@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchExpenses } from '../../actions/expenses';
+import { reduxForm, Field } from 'redux-form';
+import { fetchExpenses, submitNewExpense } from '../../actions/expenses';
+import Card, { CardActions, CardHeader } from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import CircularProgress from 'material-ui/CircularProgress';
 import Chip from 'material-ui/Chip';
+
 import {
     Table,
     TableBody,
@@ -11,7 +17,6 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 import ExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import CircularProgress from 'material-ui/CircularProgress';
 import { FormattedDate } from 'react-intl';
 
 class Expenses extends Component {
@@ -19,6 +24,7 @@ class Expenses extends Component {
         super(props);
 
         this.handleExpandMoreClick = this.handleExpandMoreClick.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -31,11 +37,65 @@ class Expenses extends Component {
         this.props.fetchExpenses();
     }
 
+    handleFormSubmit(values) {
+        console.log(values);
+        this.props.submitNewExpense(values);
+    }
+
+    renderAmountField(field) {
+        return (
+            <TextField
+                id="amount"
+                type="number"
+                hintText="Expense amount"
+                style={{ width: 'auto' }}
+                {...field.input}
+            />
+        );
+    }
+
+    renderExpenseCategoryField(field) {
+        return (
+            <TextField
+                id="expense_category"
+                type="text"
+                hintText="Expense category"
+                style={{ width: 'auto' }}
+                {...field.input}
+            />
+        );
+    }
+
+    renderCurrencyField(field) {
+        return (
+            <TextField
+                id="currency"
+                type="text"
+                hintText="Expense currency"
+                style={{ width: 'auto' }}
+                {...field.input}
+            />
+        );
+    }
+
+    renderDescriptionField(field) {
+        return (
+            <TextField
+                id="description"
+                type="text"
+                hintText="Expense description"
+                style={{ width: 'auto' }}
+                {...field.input}
+                fullWidth={true}
+            />
+        );
+    }
+
+
     renderTableRows() {
         return this.props.expenses.map((expense, index) => {
             const { id, amount, description, expense_category, currency, created_at } = expense;
             const itemDate = new Date(created_at);
-            const itemDateTime = `${itemDate.getHours()}:${itemDate.getMinutes()} - ${itemDate.getDate()}/${itemDate.getMonth()}/${itemDate.getFullYear()}`;
 
             return (
                 <TableRow key={id}>
@@ -79,6 +139,8 @@ class Expenses extends Component {
     }
 
     render() {
+        const { handleSubmit } = this.props;
+
         return (
             <div className="main-window__expenses">
                 <div className="expenses__header">
@@ -86,6 +148,53 @@ class Expenses extends Component {
                     { this.props.expenses.length === 0 ? <CircularProgress size={20} thickness={3} /> : null }
                 </div>
                 <div className="expenses__content">
+                    {/*-------------*/}
+
+                    <Card className="new-expense-card">
+                        <CardHeader
+                            title="New Expense"
+                            style={{
+                                padding: '12px 14px'
+                            }}
+                            titleStyle={{
+                                color: '#999',
+                                fontSize: '18px'
+                            }}
+                        />
+                        <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+                            <div className="card-form">
+                                <Field
+                                    name="amount"
+                                    component={this.renderAmountField}
+                                />
+                                <Field
+                                    name="category"
+                                    component={this.renderExpenseCategoryField}
+                                />
+                                <Field
+                                    name="currency"
+                                    component={this.renderCurrencyField}
+                                />
+                                <Field
+                                    name="description"
+                                    component={this.renderDescriptionField}
+                                />
+                            </div>
+                            <CardActions
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-end'
+                                }}
+                            >
+                                {   this.props.logging ?
+                                    <CircularProgress /> :
+                                    <FlatButton label="Submit" primary={true} type="submit" />
+                                }
+                            </CardActions>
+                        </form>
+                    </Card>
+
+                    {/*-------------*/}
                     <div className="expenses__table">
                         {this.renderExpensesTable()}
                     </div>
@@ -104,6 +213,24 @@ class Expenses extends Component {
     }
 }
 
+function validate(values) {
+    const errors = {};
+
+    if(!values.amount) {
+        errors.email = 'Please enter an amount';
+    }
+
+    if(!values.category) {
+        errors.category = 'Please select a category';
+    }
+
+    if(!values.currency) {
+        errors.currency = 'Please select a currency';
+    }
+
+    return errors;
+}
+
 function mapStateToProps({ expenses }) {
     return {
         expenses: expenses.expensesList,
@@ -112,4 +239,9 @@ function mapStateToProps({ expenses }) {
     };
 }
 
-export default connect(mapStateToProps, { fetchExpenses })(Expenses);
+export default reduxForm({
+    validate,
+    form: 'NewExpenseForm'
+})(
+    connect(mapStateToProps, { fetchExpenses, submitNewExpense })(Expenses)
+);

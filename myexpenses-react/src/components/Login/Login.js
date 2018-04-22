@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { userLogin } from '../../actions/auth/login';
 
-import { Field } from 'redux-form';
 import Card, { CardActions, CardHeader } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
