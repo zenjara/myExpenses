@@ -1,5 +1,4 @@
-import axios from 'axios';
-import LocalStorage from '../utils/localStorage';
+import Request from "../utils/request";
 import { reset } from "redux-form";
 import {
     FETCH_CATEGORIES,
@@ -10,10 +9,8 @@ import {
 } from './types';
 
 export function fetchCategories() {
-    const token = LocalStorage.getAccessToken();
-
     return function(dispatch) {
-        axios.get(`http://159.89.190.11/api/expense-categories`, { headers: { 'Authorization': `Bearer ${token}` } })
+        Request.authorizedRequest().get('/expense-categories')
             .then(response => {
                 dispatch({ type: FETCH_CATEGORIES, payload: response.data });
             })
@@ -24,12 +21,10 @@ export function fetchCategories() {
 }
 
 export function fetchExpenses() {
-    const token = LocalStorage.getAccessToken();
-
     return function(dispatch, getState) {
         const page = getState().expenses.nextPage;
 
-        axios.get(`http://159.89.190.11/api/expenses?page=${page}`, { headers: { 'Authorization': `Bearer ${token}` } })
+        Request.authorizedRequest().get(`/expenses?page=${page}`)
             .then(response => {
                 dispatch({ type: FETCH_EXPENSES, payload: response.data });
             })
@@ -40,8 +35,6 @@ export function fetchExpenses() {
 }
 
 export function submitNewExpense({ amount, category, currency, description }) {
-    const token = LocalStorage.getAccessToken();
-
     return function(dispatch) {
         const expenseData = {
             amount,
@@ -51,7 +44,7 @@ export function submitNewExpense({ amount, category, currency, description }) {
         };
 
         dispatch({ type: SUBMITTING_EXPENSE });
-        axios.post(`http://159.89.190.11/api/expenses`, expenseData, { headers: { 'Authorization': `Bearer ${token}` } })
+        Request.authorizedRequest().post('/expenses', expenseData)
             .then(response => {
                 dispatch({ type: RESET_SUBMITTING_EXPENSE });
                 dispatch({ type: NEW_EXPENSE, payload: response.data });
