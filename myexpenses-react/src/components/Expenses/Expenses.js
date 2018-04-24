@@ -162,7 +162,7 @@ class Expenses extends Component {
     }
 
     render() {
-        const { handleSubmit, reset } = this.props;
+        const { handleSubmit } = this.props;
 
         return (
             <div className="main-window__expenses">

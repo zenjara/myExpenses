@@ -8,8 +8,17 @@ class LocalStorage {
         localStorage.setItem('access_token', token);
     }
 
-    static clearToken() {
+    static getRefreshToken() {
+        return localStorage.getItem('refresh_token');
+    }
+
+    static setRefreshToken(token) {
+        localStorage.setItem('refresh_token', token);
+    }
+
+    static clearTokens() {
         localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
     }
 
 }
