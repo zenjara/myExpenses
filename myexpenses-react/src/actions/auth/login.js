@@ -26,7 +26,7 @@ export function userLogin({ email, password }) {
 }
 
 export function userLogout() {
-    LocalStorage.clearToken();
+    LocalStorage.clearTokens();
     return {
         type: UNAUTH_USER
     };
