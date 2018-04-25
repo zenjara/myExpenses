@@ -35,7 +35,7 @@ class Request {
                     });
             }
 
-            return Promise.reject(error);
+            return Promise.reject(error.response);
         });
 
         return instance;

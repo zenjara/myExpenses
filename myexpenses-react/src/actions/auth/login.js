@@ -27,7 +27,11 @@ export function userLogin({ email, password }) {
 
 export function userLogout() {
     LocalStorage.clearTokens();
-    return {
-        type: UNAUTH_USER
-    };
+    return { type: UNAUTH_USER };
+}
+
+export function logoutUponInvalidRefresh(errorStatus, dispatch) {
+    if(errorStatus === 401) {
+        dispatch(userLogout());
+    }
 }

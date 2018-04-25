@@ -1,5 +1,6 @@
 import Request from "../utils/request";
 import { reset } from "redux-form";
+import { logoutUponInvalidRefresh } from "./auth/login";
 import {
     FETCH_CATEGORIES,
     FETCH_EXPENSES,
@@ -15,7 +16,7 @@ export function fetchCategories() {
                 dispatch({ type: FETCH_CATEGORIES, payload: response.data });
             })
             .catch(error => {
-                console.log(error);
+                logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     };
 }
@@ -29,7 +30,7 @@ export function fetchExpenses() {
                 dispatch({ type: FETCH_EXPENSES, payload: response.data });
             })
             .catch(error => {
-                console.log(error);
+                logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     };
 }
@@ -51,7 +52,7 @@ export function submitNewExpense({ amount, category, currency, description }) {
                 dispatch(reset('NewExpenseForm'));
             })
             .catch(error => {
-                console.log(error);
+                logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     };
 }

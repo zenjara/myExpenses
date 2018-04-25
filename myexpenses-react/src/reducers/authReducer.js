@@ -9,8 +9,6 @@ export default function(state = { authenticated: false }, action) {
     switch(action.type) {
         case AUTH_USER:
             return { ...state, authenticated: true };
-        case UNAUTH_USER:
-            return { ...state, authenticated: false };
         case LOGGING_USER:
             return { ...state, logging: true };
         case RESET_LOGGING_USER:
