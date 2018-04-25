@@ -1,5 +1,6 @@
 import Request from "../utils/request";
 import axios from 'axios';
+import { logoutUponInvalidRefresh } from "./auth/login";
 import {
     FETCH_USER,
     FETCH_LIMITS,
@@ -17,7 +18,7 @@ export function fetchUser() {
                 dispatch({ type: FETCH_LIMITS, payload: { dailyLimit, monthlyLimit } });
             })
             .catch(error => {
-                console.log(error);
+                logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     };
 }
@@ -29,7 +30,7 @@ export function fetchCurrencies() {
                 dispatch({ type: FETCH_CURRENCY, payload: response.data });
             })
             .catch(error => {
-                console.log(error);
+                logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     }
 }
@@ -46,7 +47,10 @@ export function setLimits(dailyLimit, monthlyLimit) {
                 const monthlyLimit = monthlyResponse.data.amount;
 
                 dispatch({ type: FETCH_LIMITS, payload: { dailyLimit, monthlyLimit } });
-            }));
+            }))
+            .catch(error => {
+                logoutUponInvalidRefresh(error.response.status, dispatch);
+            });
     }
 }
 
