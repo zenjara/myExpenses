@@ -31,6 +31,9 @@ class Sidebar extends Component {
                                 <NavLink to='/me' activeClassName="selected"><i className="zmdi zmdi-account zmdi-hc-lg"></i> Profile</NavLink>
                             </li>
                             <li>
+                                <NavLink to="/upload" activeClassName="selected"><i className="zmdi zmdi-upload"></i> Upload excel</NavLink>
+                            </li>
+                            <li>
                                 <a onClick={this.handleLogoutClick}><i className="zmdi zmdi-power zmdi-hc-lg"></i> Log out</a>
                             </li>
                         </ul>

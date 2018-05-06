@@ -21,3 +21,7 @@ export const FETCH_CATEGORIES = 'fetch_categories';
 
 // Currency
 export const FETCH_CURRENCY = 'fetch_currency';
+
+// Excel upload
+export const EXCEL_UPLOADING = 'excel_uploading';
+export const EXCEL_UPLOADED = 'excel_uploaded';
