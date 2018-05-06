@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Dashboard from '../Dashboard';
 import UserInfo from '../UserInfo';
 import Expenses from '../Expenses';
+import Upload from '../UploadSheet';
 
 class MainWindow extends Component {
 
@@ -15,6 +16,7 @@ class MainWindow extends Component {
                     <Route exact path='/' component={Dashboard} />
                     <Route path='/me' component={UserInfo} />
                     <Route path='/expenses' component={Expenses} />
+                    <Route path='/upload' component={Upload} />
                 </Switch>
             </div>
         );

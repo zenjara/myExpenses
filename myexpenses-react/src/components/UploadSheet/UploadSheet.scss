@@ -1,0 +1,23 @@
+.main-window__upload {
+    height: 100%;
+    margin-top: 8px;
+
+    .dropzone {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        border-width: 2px;
+        border-color: #666;
+        border-style: dashed;
+        border-radius: 5px;
+        color: #707070;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+    }
+
+}
