@@ -15,6 +15,7 @@ export const FETCH_EXPENSES = 'fetch_expenses';
 export const NEW_EXPENSE = 'new_expense';
 export const SUBMITTING_EXPENSE = 'submitting_expense';
 export const RESET_SUBMITTING_EXPENSE = 'reset_submitting_expense';
+export const FETCH_TOTAL_EXPENSES = 'fetch_total_expenses';
 
 // Expense Categories
 export const FETCH_CATEGORIES = 'fetch_categories';
