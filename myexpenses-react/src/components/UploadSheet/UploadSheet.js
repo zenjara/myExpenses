@@ -19,7 +19,7 @@ class UploadSheet extends Component {
     render() {
         return (
             <div className="main-window__upload">
-                <Dropzone className="dropzone" onDrop={this.onDrop} accept="application/vnd.ms-excel">
+                <Dropzone className="dropzone" onDrop={this.onDrop} accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                     <p>Drop your excel sheet here</p>
                     <i className="zmdi zmdi-upload zmdi-hc-2x"></i>
                 </Dropzone>
