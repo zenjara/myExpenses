@@ -6,7 +6,8 @@ import {
     FETCH_EXPENSES,
     NEW_EXPENSE,
     SUBMITTING_EXPENSE,
-    RESET_SUBMITTING_EXPENSE
+    RESET_SUBMITTING_EXPENSE,
+    FETCH_TOTAL_EXPENSES
 } from './types';
 
 export function fetchCategories() {
@@ -19,6 +20,18 @@ export function fetchCategories() {
                 logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     };
+}
+
+export function fetchCurrentExpenses() {
+    return function(dispatch) {
+        Request.authorizedRequest().get('/current-expenses')
+            .then(response => {
+                dispatch({ type: FETCH_TOTAL_EXPENSES, payload: response.data });
+            })
+            .catch(error => {
+                logoutUponInvalidRefresh(error.response.status, dispatch);
+            });
+    }
 }
 
 export function fetchExpenses() {

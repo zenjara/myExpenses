@@ -24,7 +24,7 @@ class UploadSheet extends Component {
                     className="dropzone"
                     onDrop={this.onDrop}
                     activeStyle={{ borderColor: '#32c787', backgroundColor: 'rgba(50, 199, 135, .1)' }}
-                    rejectStyle={{ borderColor: '#FF6E40', backgroundColor: 'rgba(255, 110, 64, .1)' }}
+                    rejectStyle={{ borderColor: '#E81555', backgroundColor: 'rgba(232, 21, 85, .15)' }}
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                 >
                     {({isDragActive, isDragReject}) => {
