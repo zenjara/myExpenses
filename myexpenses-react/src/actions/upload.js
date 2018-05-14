@@ -12,7 +12,7 @@ export function uploadExcelFile(files) {
         formData.append("file", files[0]);
 
         dispatch({ type: EXCEL_UPLOADING });
-        Request.authorizedRequest().post('/excel/upload')
+        Request.authorizedRequest().post('/excel/upload', formData)
             .then(response => {
                 dispatch({ type: EXCEL_UPLOADED });
             })

@@ -1,6 +1,5 @@
 import {
     AUTH_USER,
-    UNAUTH_USER,
     LOGGING_USER,
     RESET_LOGGING_USER
 } from "../actions/types";
