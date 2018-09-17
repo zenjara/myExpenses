@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-	has_many :expenses
-	has_one :daily_limit
-	has_one :monthly_limit
+	has_many :expense_categories,  dependent: :destroy
+	has_many :expenses, dependent: :destroy
+	has_one :daily_limit, dependent: :destroy
+	has_one :monthly_limit, dependent: :destroy
 
 	validates_presence_of :name, :email, :password_digest
 	validates :email, uniqueness: true
