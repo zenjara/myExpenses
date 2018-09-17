@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
 	# POST /register
 	def register
-		@user = User.create(user_params)
+		@user = User.new(user_params)
 		if @user.save
 			response = { message: 'User created successfully' }
 			render json: response, status: :created
