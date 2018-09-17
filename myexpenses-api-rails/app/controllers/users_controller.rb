@@ -16,12 +16,33 @@ class UsersController < ApplicationController
 		authenticate params[:email], params[:password]
 	end
 
-	def test
-		render json: {
-			message: 'You have passed authentication and authorization test'
-		}
+	def profile
+		@current_user
+
+		render :json => @current_user
 	end
-		private
+
+	def set_daily_limit
+		currency = params[:currency] ? params[:currency] : 'HRK'
+		@daily_limit = @current_user.build_daily_limit(amount: params[:amount], currency: currency)
+		if @daily_limit.save
+			render status: 201, json: @daily_limit
+		else
+			render status: 400, json: { "errors" => @daily_limit.errors }
+		end
+	end
+
+	def set_monthly_limit
+		currency = params[:currency] ? params[:currency] : 'HRK'
+		@monthly_limit = @current_user.build_monthly_limit(amount: params[:amount], currency: currency)
+		if @monthly_limit.save
+			render status: 201, json: @monthly_limit
+		else
+			render status: 400, json: { "errors" => @monthly_limit.errors }
+		end
+	end
+
+	private
 
 		def user_params
 			params.permit(
