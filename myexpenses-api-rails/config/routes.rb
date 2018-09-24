@@ -19,4 +19,7 @@ Rails.application.routes.draw do
 	put 'api/v1/expenses/:id', to: 'expenses#update'
 	delete 'api/v1/expenses/:id', to: 'expenses#destroy'
 
+	# Limit Metrics
+	get 'api/v1/metrics', to: 'metrics#expense_calculations'
+
 end
