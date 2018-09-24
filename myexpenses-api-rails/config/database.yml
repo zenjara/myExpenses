@@ -83,3 +83,5 @@ production:
   database: myexpenses-api-rails_production
   username: myexpenses-api-rails
   password: <%= ENV['MYEXPENSES-API-RAILS_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+
