@@ -137,7 +137,7 @@ DEPENDENCIES
   byebug
   jwt
   listen (~> 3.0.5)
-  pg (~> 0.18)
+  pg (~> 0.20)
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.6)
