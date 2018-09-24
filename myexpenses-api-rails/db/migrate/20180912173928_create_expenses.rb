@@ -4,6 +4,7 @@ class CreateExpenses < ActiveRecord::Migration[5.0]
 			t.float :amount
 			t.string :description
 			t.string :currency
+			t.datetime :date
 			t.integer :user_id
 			t.integer :expense_category_id
 
