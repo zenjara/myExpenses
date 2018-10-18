@@ -1,7 +1,7 @@
 import axios from 'axios';
 import LocalStorage from './localStorage';
 
-const ROOT_URL = 'http://159.89.190.11/api';
+const ROOT_URL = 'https://young-falls-56718.herokuapp.com/api/v1';
 
 class Request {
 
