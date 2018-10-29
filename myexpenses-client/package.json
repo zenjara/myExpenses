@@ -1,6 +1,6 @@
 {
   "name": "myexpenses-client",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "First version of MyExpenses client application.",
   "author": "MyExpenses <korac.kristijan@gmail.com>",
