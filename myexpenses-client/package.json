@@ -2,21 +2,25 @@
   "name": "myexpenses-client",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "normalize.css": "^8.0.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint . *.{js,jsx} --quiet --fix"
-  },
+  "description": "First version of MyExpenses client application.",
+  "author": "MyExpenses <korac.kristijan@gmail.com>",
+  "main": "public/electron-starter.js",
+  "homepage": "./",
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "build": {
+    "files": [
+      "./build/",
+      "./node_modules/",
+      "./public/electron-starter.js"
+    ],
+    "extends": null,
+    "appId": "com.electron.myexpenses-client-app",
+    "copyright": "CopyrightMYEXPENSES",
+    "mac": {
+      "category": "myexpenses.client.app"
+    }
   },
   "browserslist": [
     ">0.2%",
@@ -24,16 +28,39 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "dependencies": {
+    "normalize.css": "^8.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "2.0.5"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
   },
   "devDependencies": {
+    "electron": "^3.0.6",
+    "electron-builder": "^20.29.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "foreman": "^3.0.1",
     "husky": "^1.1.2",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0"
+  },
+  "scripts": {
+    "start": "nf start -p 3000",
+    "react-start": "react-scripts start",
+    "electron-start": "node electron-wait-react",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . *.{js,jsx} --quiet --fix",
+    "electron": "electron .",
+    "dist": "npm version patch && npm run builder",
+    "dist:sprint": "npm version minor && npm run builder",
+    "builder": "rm -rf dist/ && rm -rf build/ && npm run build && electron-builder -m",
+    "postversion": "git add package.json package-lock.json && git commit -mv$npm_package_version && git push"
   }
 }
