@@ -16,14 +16,14 @@ function createWindow() {
   const startUrl =
     process.env.ELECTRON_START_URL ||
     url.format({
-      pathname: path.join(__dirname, '/../build/index.electron.html'),
+      pathname: path.join(__dirname, '/../build/index.html'),
       protocol: 'file:',
       slashes: true
     });
-  mainWindow.loadURL('http://localhost:3000');
+  mainWindow.loadURL(startUrl);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
