@@ -17,6 +17,7 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
 
+    this.handleOnClickFooter = this.handleOnClickFooter.bind(this);
     this.isNavActive = this.isNavActive.bind(this);
     this.state = {
       isFooterOpen: false,

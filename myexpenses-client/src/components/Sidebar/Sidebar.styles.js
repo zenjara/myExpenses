@@ -6,8 +6,8 @@ const styles = {
     flexDirection: 'column',
     flexShrink: 0,
     width: '200px',
-    padding: () => {
-      return window.require ? '40px 0 24px 0' : '24px 0';
+    paddingTop: () => {
+      return window.require ? '40px' : '24px';
     },
     backgroundColor: myExpensesPurple
   },

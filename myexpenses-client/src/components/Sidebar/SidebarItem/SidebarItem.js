@@ -7,7 +7,7 @@ import styles from './SidebarItem.styles';
 
 function SidebarItemHOC(IconComponent) {
   class SidebarItem extends Component {
-    render() {
+    renderSidebarLink() {
       const { classes, href, text, isHovered, isNavActive } = this.props;
 
       const navActive = isNavActive(href);
@@ -19,14 +19,36 @@ function SidebarItemHOC(IconComponent) {
         </Link>
       );
     }
+
+    renderSidebarItem() {
+      const { classes, text, isHovered, onClick } = this.props;
+
+      return (
+        <div className={classes.sidebarItem} {...(onClick ? { onClick } : {})}>
+          <IconComponent isHovered={isHovered} />
+          <span>{text}</span>
+        </div>
+      );
+    }
+
+    render() {
+      return this.props.isLink
+        ? this.renderSidebarLink()
+        : this.renderSidebarItem();
+    }
   }
+
+  SidebarItem.defaultProps = {
+    isLink: true
+  };
 
   SidebarItem.propTypes = {
     classes: PropTypes.object.isRequired,
     text: PropTypes.string.isRequired,
     isHovered: PropTypes.bool,
     href: PropTypes.string,
-    isNavActive: PropTypes.func
+    isNavActive: PropTypes.func,
+    onClick: PropTypes.func
   };
 
   return injectSheet(styles)(SidebarItem);
