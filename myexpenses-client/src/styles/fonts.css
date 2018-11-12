@@ -13,7 +13,7 @@
 }
 
 @font-face {
-  font-family: 'Circular Book';
+  font-family: 'Circular';
   src: url('../assets/fonts/Circular-BookItalic.eot');
   src: url('../assets/fonts/Circular-BookItalic.eot?#iefix')
       format('embedded-opentype'),
@@ -50,7 +50,7 @@
 }
 
 @font-face {
-  font-family: 'Circular Book';
+  font-family: 'Circular';
   src: url('../assets/fonts/Circular-Book.eot');
   src: url('../assets/fonts/Circular-Book.eot?#iefix')
       format('embedded-opentype'),

@@ -1,4 +1,4 @@
-import { semibold } from '../../../assets/shared-styles/general';
+import { regular } from '../../../assets/shared-styles/general';
 
 const styles = {
   sidebarItem: {
@@ -8,7 +8,7 @@ const styles = {
     padding: '0 16px',
     color: props => (props.isHovered ? '#fff' : 'rgba(255, 255, 255, 0.5)'),
     fontSize: '13px',
-    fontWeight: semibold,
+    fontWeight: regular,
     letterSpacing: '1px',
     cursor: 'pointer',
     textDecoration: 'none',

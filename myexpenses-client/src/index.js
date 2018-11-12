@@ -5,6 +5,7 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 import 'normalize.css';
 import './styles/index.css';
+import './styles/fonts.css';
 
 import App from './components/App';
 
