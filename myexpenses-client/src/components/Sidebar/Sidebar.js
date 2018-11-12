@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { matchPath } from 'react-router-dom';
 import injectSheet from 'react-jss';
 
+import { getUserProfile } from './Sidebar.data';
 import packageJson from '../../../package.json';
 import SidebarItem from './SidebarItem';
 import LogoMyExpenses from '../Shared/Icons/LogoMyExpenses';
@@ -23,6 +24,10 @@ class Sidebar extends Component {
       isFooterOpen: false,
       user: {}
     };
+  }
+
+  componentDidMount() {
+    getUserProfile().then(res => this.setState({ user: res }));
   }
 
   handleOnClickFooter() {

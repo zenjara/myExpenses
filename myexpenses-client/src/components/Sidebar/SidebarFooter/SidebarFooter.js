@@ -37,6 +37,14 @@ class SidebarFooter extends Component {
     );
   }
 
+  renderUserName() {
+    const { user } = this.props;
+
+    if (!Object.keys(user).length) return null;
+
+    return user.name[0].toUpperCase() + user.name.slice(1);
+  }
+
   renderUserAvatar() {
     const { user } = this.props;
 
@@ -58,8 +66,7 @@ class SidebarFooter extends Component {
             className={classes.sidebarAvatar}
           />
           <span className={classes.sidebarUserName}>
-            {/*{this.renderUserName()}*/}
-            Kristijan K.
+            {this.renderUserName()}
           </span>
           <SidebarArrowIcon />
         </div>
