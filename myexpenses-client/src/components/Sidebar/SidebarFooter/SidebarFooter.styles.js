@@ -33,6 +33,19 @@ const styles = {
     fontWeight: semibold,
     wordBreak: 'break-all'
   },
+  avatarPlaceholder: {
+    width: '32px',
+    height: '32px',
+    borderRadius: '4px',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)'
+  },
+  usernamePlaceholder: {
+    width: '89px',
+    height: '20px',
+    borderRadius: '2px',
+    marginLeft: '12px',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)'
+  },
   footerVersionSeparator: {
     height: '1px',
     margin: '0 16px',

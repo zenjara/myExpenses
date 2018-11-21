@@ -21,13 +21,14 @@ class Sidebar extends Component {
     this.handleOnClickFooter = this.handleOnClickFooter.bind(this);
     this.isNavActive = this.isNavActive.bind(this);
     this.state = {
+      loading: true,
       isFooterOpen: false,
       user: {}
     };
   }
 
   componentDidMount() {
-    getUserProfile().then(res => this.setState({ user: res }));
+    getUserProfile().then(res => this.setState({ loading: false, user: res }));
   }
 
   handleOnClickFooter() {
@@ -77,7 +78,7 @@ class Sidebar extends Component {
 
   render() {
     const { classes } = this.props;
-    const { user, isFooterOpen } = this.state;
+    const { user, isFooterOpen, loading } = this.state;
 
     return (
       <div className={classes.sidebar}>
@@ -89,6 +90,7 @@ class Sidebar extends Component {
           handleOnClickFooter={this.handleOnClickFooter}
           isFooterOpen={isFooterOpen}
           user={user}
+          loading={loading}
           versionNumber={packageJson.version}
           isNavActive={this.isNavActive}
         />
@@ -96,4 +98,5 @@ class Sidebar extends Component {
     );
   }
 }
+
 export default injectSheet(styles)(Sidebar);
