@@ -1,4 +1,8 @@
-import { myExpensesPurple, bold } from '../../../assets/shared-styles/general';
+import {
+  myExpensesPurple,
+  bold,
+  black1
+} from '../../../assets/shared-styles/general';
 
 const styles = {
   meCardWrapper: {
@@ -21,7 +25,7 @@ const styles = {
   },
   meCardTitle: {
     padding: '16px',
-    color: '#404040',
+    color: black1,
     fontSize: '15px',
     fontWeight: bold
   },

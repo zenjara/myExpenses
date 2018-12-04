@@ -1,4 +1,8 @@
-import { bold, myExpensesPurple } from '../../assets/shared-styles/general';
+import {
+  black1,
+  bold,
+  myExpensesPurple
+} from '../../assets/shared-styles/general';
 
 const styles = {
   dashboardPageTitle: {
@@ -20,7 +24,8 @@ const styles = {
   limitStat: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    color: black1
   },
   statLabel: {
     fontSize: '24px'
