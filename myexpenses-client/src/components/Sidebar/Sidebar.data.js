@@ -4,7 +4,7 @@
 
 export const getUserProfile = () => {
   return new Promise(resolve => {
-    setTimeout(resolve(userInfo), 1400);
+    setTimeout(() => resolve(userInfo), 1400);
   });
 };
 

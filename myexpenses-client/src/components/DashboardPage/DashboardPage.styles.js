@@ -10,6 +10,10 @@ const styles = {
     fontSize: '32px',
     fontWeight: bold
   },
+  loadingWrapper: {
+    marginTop: '64px',
+    textAlign: 'center'
+  },
   dashboardStats: {
     display: 'flex'
   },
