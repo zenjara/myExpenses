@@ -13,7 +13,7 @@ const styles = {
     borderLeft: `solid 8px ${myExpensesPurple}`,
     borderRadius: '8px',
     backgroundColor: '#fff',
-    boxShadow: '0 0 8px 0 #D4d4d4'
+    boxShadow: props => (props.shadow ? '0 0 8px 0 #D4d4d4' : null)
   },
   meCardTitleWrapper: {
     display: 'flex',

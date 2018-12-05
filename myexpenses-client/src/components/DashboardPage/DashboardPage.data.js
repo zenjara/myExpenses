@@ -4,7 +4,7 @@
 
 export const getDashboardStats = () => {
   return new Promise(resolve => {
-    setTimeout(() => resolve(dashboardStats), 2400);
+    setTimeout(() => resolve(dashboardStats), 1400);
   });
 };
 

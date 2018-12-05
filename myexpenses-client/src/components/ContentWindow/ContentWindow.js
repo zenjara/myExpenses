@@ -3,6 +3,7 @@ import injectSheet from 'react-jss';
 import { Route, Switch } from 'react-router-dom';
 
 import DashboardPage from '../DashboardPage';
+import ExpensesPage from '../ExpensesPage/ExpensesPage';
 import styles from './ContentWindow.styles';
 
 const ContentWindow = props => {
@@ -12,7 +13,7 @@ const ContentWindow = props => {
     <div className={classes.contentWindow}>
       <Switch>
         <Route exact path="/" component={DashboardPage} />
-        {/*<Route path="/expenses" component={ExpensesPage} />*/}
+        <Route path="/expenses" component={ExpensesPage} />
         {/*<Route path="/profile" component={ProfilePage} />*/}
         {/*<Route path="/upload" component={UploadPage} />*/}
       </Switch>
