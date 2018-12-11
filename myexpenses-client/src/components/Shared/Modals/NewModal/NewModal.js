@@ -4,6 +4,7 @@ import injectSheet from 'react-jss';
 
 import MeCard from '../../MeCard';
 import MeButton from '../../MeButton';
+import MeSelect from '../../MeSelect';
 import styles from './NewModal.styles';
 
 class NewModal extends Component {
@@ -15,7 +16,7 @@ class NewModal extends Component {
 
     this.state = {
       expenseAmount: '',
-      expenseCategory: '',
+      expenseCategory: null,
       expenseDescription: ''
     };
   }
@@ -36,6 +37,10 @@ class NewModal extends Component {
     });
   }
 
+  handleSelectChange(expenseCategory) {
+    this.setState({ expenseCategory });
+  }
+
   handleInputChange(value, inputType) {
     let newState = { ...this.state };
     newState[inputType] = value;
@@ -44,8 +49,13 @@ class NewModal extends Component {
   }
 
   render() {
-    const { classes, hideModal } = this.props;
+    const { classes, hideModal, categories } = this.props;
     const { expenseAmount, expenseCategory, expenseDescription } = this.state;
+
+    const categoryOptions = categories.map(({ id, name }) => ({
+      value: id,
+      label: name
+    }));
 
     return (
       <MeCard>
@@ -66,15 +76,12 @@ class NewModal extends Component {
               </div>
               <div className={classes.formField}>
                 <label>EXPENSE CATEGORY</label>
-                <input
-                  className={classes.modalInput}
-                  value={expenseCategory}
-                  onChange={event => {
-                    this.handleInputChange(
-                      event.target.value,
-                      'expenseCategory'
-                    );
-                  }}
+                <MeSelect
+                  width="240px"
+                  isClearable
+                  options={categoryOptions}
+                  placeholder="Select category"
+                  onChange={option => this.handleSelectChange(option.value)}
                 />
               </div>
             </div>

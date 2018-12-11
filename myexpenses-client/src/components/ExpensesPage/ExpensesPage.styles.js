@@ -1,4 +1,8 @@
-import { bold, myExpensesPurple } from '../../assets/shared-styles/general';
+import {
+  black2,
+  bold,
+  myExpensesPurple
+} from '../../assets/shared-styles/general';
 
 const styles = {
   expensesPageTitle: {
@@ -23,7 +27,9 @@ const styles = {
   expensesTable: {
     width: '100%',
     borderCollapse: 'collapse',
+    color: black2,
     textAlign: 'left',
+    tableLayout: 'fixed',
     '& thead': {
       borderBottom: 'solid 1px rgba(0, 0, 0, 0.1)',
       '& th': {
@@ -32,10 +38,7 @@ const styles = {
       }
     },
     '& tbody': {
-      display: 'block',
-      maxHeight: '560px',
       fontSize: '16px',
-      overflowY: 'scroll',
       '& td': {
         display: 'table-cell',
         padding: '12px 0'
@@ -46,8 +49,8 @@ const styles = {
     }
   },
   headerAmount: { width: '170px' },
+  headerDate: { width: '150px' },
   headerCategory: { width: '240px' }
-  // headerDescription: { width: '80px' }
 };
 
 export default styles;

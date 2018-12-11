@@ -1,16 +1,16 @@
-export function createExpense(expense) {
-  // Return promise to external API call
-}
+import { get, post } from '../../http';
+
+export const createExpense = expenseData => post('/expenses', expenseData);
+
+export const getExpenses = () => get('/expenses');
+
+export const getCategories = () => get('/expense_categories');
 
 // export function getExpenses() {
-// Return promise to external API call
+//   return new Promise(resolve => {
+//     setTimeout(() => resolve(expensesData), 0);
+//   });
 // }
-
-export function getExpenses() {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(expensesData), 0);
-  });
-}
 
 const expensesData = [
   {

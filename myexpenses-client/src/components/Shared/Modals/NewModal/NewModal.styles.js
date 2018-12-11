@@ -17,15 +17,19 @@ const styles = {
   modalBodyContent: {
     marginBottom: '24px',
     '& label': {
+      display: 'inline-block',
+      marginBottom: '12px',
       color: black1,
       fontSize: '12px',
       fontWeight: semibold
+    },
+    modalInput: {
+      height: '44px'
     },
     '& input, & textarea': {
       width: '100%',
       border: 'solid 1px rgba(0, 0, 0, 0.2)',
       borderRadius: '4px',
-      marginTop: '12px',
       padding: '12px 16px',
       backgroundColor: 'rgba(255, 255, 255, 0.15)',
       fontSize: '15px',
