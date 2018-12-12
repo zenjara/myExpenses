@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SidebarArrowIcon = () => {
+const ArrowDownIcon = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24">
       <g fill="none" fillRule="evenodd">
@@ -16,4 +16,4 @@ const SidebarArrowIcon = () => {
   );
 };
 
-export default SidebarArrowIcon;
+export default ArrowDownIcon;

@@ -26,7 +26,7 @@ class DashboardPage extends Component {
     const { classes } = this.props;
 
     return (
-      <MeCard title={title}>
+      <MeCard title={title} shadow>
         <div className={classes.limitStatsWrapper}>
           <div className={classes.limitStat}>
             <div className={classes.statLabel}>Limit</div>

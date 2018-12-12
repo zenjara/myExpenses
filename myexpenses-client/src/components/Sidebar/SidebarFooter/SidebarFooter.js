@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import SidebarArrowIcon from '../../Shared/Icons/SidebarArrowIcon';
+import ArrowDownIcon from '../../Shared/Icons/ArrowDownIcon';
 import SidebarItem from '../SidebarItem';
 import withHover from '../../Shared/HOCs/withHover';
 import LogoutIcon from '../../Shared/Icons/LogoutIcon';
@@ -65,7 +65,7 @@ class SidebarFooter extends Component {
           className={classes.sidebarAvatar}
         />
         <span className={classes.sidebarUserName}>{this.renderUserName()}</span>
-        <SidebarArrowIcon />
+        <ArrowDownIcon />
       </div>
     );
   }
