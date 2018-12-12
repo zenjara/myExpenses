@@ -1,0 +1,19 @@
+api_expense_index:
+    path: /expenses
+    methods: GET
+    defaults: { _controller: AppBundle:Expense:index }
+
+api_expense_new:
+    path: /expenses
+    methods: POST
+    defaults: { _controller: AppBundle:Expense:new }
+
+api_expense_show:
+    path: /expenses/{expenseId}
+    methods: GET
+    defaults: { _controller: AppBundle:Expense:show }
+
+api_expense_delete:
+    path: /expenses/{expenseId}
+    methods: DELETE
+    defaults: { _controller: AppBundle:Expense:remove }

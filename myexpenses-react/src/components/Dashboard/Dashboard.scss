@@ -1,0 +1,65 @@
+.main-window__dashboard {
+    padding: 20px;
+
+    .dashboard__header {
+        display: flex;
+        align-items: center;
+        color: #999;
+        margin-bottom: 20px;
+
+        h2 {
+            margin: 0 10px 0 0;
+        }
+
+    }
+
+    .dashboard__content__cards {
+        display: flex;
+        justify-content: space-around;
+
+        .dashboard__card {
+            width: 45%;
+
+            .dashboard__card__content {
+                padding: 12px 20px 0 20px;
+
+                .card-stat {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: baseline;
+                    color: #707070;
+
+                    h4 {
+                        margin: 0;
+                        font-size: 24px;
+                        font-weight: 400;
+                    }
+
+                    h3 {
+                        margin: 0;
+                        font-size: 32px;
+                        font-weight: 300;
+                    }
+
+                    &.balance {
+                        color: #32c787;
+
+                        &.balance--negative {
+                            color: #E81555;
+                        }
+
+                        h3 {
+                            font-size: 48px;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}

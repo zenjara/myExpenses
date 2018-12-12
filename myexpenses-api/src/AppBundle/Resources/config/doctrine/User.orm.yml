@@ -1,0 +1,27 @@
+AppBundle\Entity\User:
+    type:  entity
+    table: user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    oneToMany:
+        expenses:
+            targetEntity: Expense
+            mappedBy: user
+            cascade: ["persist", "remove"]
+    oneToOne:
+        dailyLimit:
+            targetEntity: DailyLimit
+            cascade: ["persist","remove"]
+            fetch: EAGER
+            joinColumn:
+                name: daily_limit_id
+                referencedColumnName: id
+        monthlyLimit:
+            targetEntity: MonthlyLimit
+            cascade: ["persist","remove"]
+            joinColumn:
+                name: monthly_limit_id
+                referencedColumnName: id

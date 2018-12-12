@@ -1,0 +1,14 @@
+api_get_my_personal_information:
+    path: /me
+    methods: GET
+    defaults: { _controller: AppBundle:Profile:getProfile }
+
+api_set_daily_limit:
+    path: /daily-limit
+    methods: POST
+    defaults: { _controller: AppBundle:Profile:setDailyLimit }
+
+api_set_monthly_limit:
+    path: /monthly-limit
+    methods: POST
+    defaults: { _controller: AppBundle:Profile:setMonthlyLimit }

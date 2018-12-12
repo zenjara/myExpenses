@@ -1,24 +1,7 @@
-# README
+# myExpenses
+Simple app for expenses
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+./myExpenses-react\
+./myExpenses-api
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+🚧 Under active development. Please checkout the `development` branch for the latest code.

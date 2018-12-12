@@ -1,0 +1,41 @@
+.main-app__sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 72px 20px 0 20px;
+
+    .sidebar-wrapper {
+        flex-grow: 1;
+        padding: 35px 20px;
+
+        ul {
+            padding: 0;
+            list-style-type: none;
+
+            a {
+                display: flex;
+                //align-items: center;
+                border-radius: 2px;
+                padding: 14px 11px;
+                color: #707070;
+                cursor: pointer;
+                text-decoration: none;
+
+                &:hover {
+                    background-color: rgba(#000, .03);
+                }
+
+                &.selected {
+                    color: #32c787;
+                }
+
+                i {
+                    margin-right: 12px;
+                }
+
+            }
+
+        }
+
+    }
+
+}

@@ -1,0 +1,60 @@
+.main-window__expenses {
+    padding: 20px;
+
+    .expenses__header {
+        display: flex;
+        align-items: center;
+        color: #999;
+        margin-bottom: 20px;
+
+        h2 {
+            margin: 0 10px 0 0;
+        }
+
+    }
+
+    .expenses__content {
+
+        form {
+            padding: 0 14px;
+
+            .card-form {
+                display: flex;
+                flex-wrap: wrap;
+
+                div {
+                    flex-grow: 1;
+                    margin-right: 12px;
+                }
+
+                div:last-child {
+                    width: 100% !important;
+                    margin: 0;
+                }
+
+            }
+
+        }
+
+        .expenses__table {
+            margin-top: 24px;
+        }
+
+        .expenses__expand-more {
+            margin-top: 8px;
+            text-align: center;
+
+            svg {
+                border-radius: 50%;
+
+                &:hover {
+                    background-color: rgba(#000, 0.2);
+                }
+
+            }
+
+        }
+
+    }
+
+}

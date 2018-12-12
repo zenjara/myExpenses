@@ -1,0 +1,18 @@
+app_expense:
+    resource: 'routing/expense.yml'
+app_user:
+    resource: 'routing/user.yml'
+app_currency:
+    resource: 'routing/currency.yml'
+app_expense_category:
+    resource: 'routing/expense_category.yml'
+
+app_excel_upload:
+     path: /excel/upload
+     methods: POST
+     defaults: { _controller: AppBundle:Excel:upload }
+
+app_current_spending:
+     path: /current-expenses
+     methods: GET
+     defaults: { _controller: AppBundle:Expense:currentExpenses }

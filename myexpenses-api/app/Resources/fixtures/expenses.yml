@@ -1,0 +1,8 @@
+AppBundle\Entity\Expense:
+    expense_{1..50}:
+        amount:  <numberBetween(1, 2000)>
+        description: <realText( 40, 2)>
+        createdAt: <dateTimeInInterval( 'now', '- 5 days', 'Europe/Zagreb')>
+        user: "@user1"
+        expenseCategory: "@expense_category<numberBetween(1,4)>"
+        currency: "@currency_kuna"
