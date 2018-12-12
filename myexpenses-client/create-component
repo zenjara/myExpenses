@@ -26,11 +26,13 @@ echo "import styles from './${name}.styles';"$'\n' >> $name.js
 
 echo "class ${name} extends Component {
   render() {
+    const { classes } = this.props;
+
     return (
       <div>${name}</div>
     );
   }
-}" >> $name.js
+}"$'\n' >> $name.js
 
 echo "export default injectSheet(styles)(${name});" >> $name.js
 
