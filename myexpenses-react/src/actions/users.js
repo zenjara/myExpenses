@@ -18,7 +18,8 @@ export function fetchUser() {
                 dispatch({ type: FETCH_LIMITS, payload: { dailyLimit, monthlyLimit } });
             })
             .catch(error => {
-                logoutUponInvalidRefresh(error.response.status, dispatch);
+              console.log(error);
+                // logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     };
 }
@@ -30,7 +31,7 @@ export function fetchCurrencies() {
                 dispatch({ type: FETCH_CURRENCY, payload: response.data });
             })
             .catch(error => {
-                logoutUponInvalidRefresh(error.response.status, dispatch);
+                // logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     }
 }

@@ -12,7 +12,7 @@ import {
 
 export function fetchCategories() {
     return function(dispatch) {
-        Request.authorizedRequest().get('/expense-categories')
+        Request.authorizedRequest().get('/expense_categories')
             .then(response => {
                 dispatch({ type: FETCH_CATEGORIES, payload: response.data });
             })
@@ -24,11 +24,12 @@ export function fetchCategories() {
 
 export function fetchCurrentExpenses() {
     return function(dispatch) {
-        Request.authorizedRequest().get('/current-expenses')
+        Request.authorizedRequest().get('/expenses')
             .then(response => {
-                dispatch({ type: FETCH_TOTAL_EXPENSES, payload: response.data });
+                // dispatch({ type: FETCH_TOTAL_EXPENSES, payload: response.data });
             })
             .catch(error => {
+                debugger
                 logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     }
@@ -43,7 +44,7 @@ export function fetchExpenses() {
                 dispatch({ type: FETCH_EXPENSES, payload: response.data });
             })
             .catch(error => {
-                logoutUponInvalidRefresh(error.response.status, dispatch);
+                // logoutUponInvalidRefresh(error.response.status, dispatch);
             });
     };
 }

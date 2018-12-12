@@ -9,10 +9,10 @@ import {
 
 export function userLogin({ email, password }) {
     return function(dispatch) {
-        const userData = { _username: email, _password: password };
+        const userData = { email, password };
 
         dispatch({ type: LOGGING_USER });
-        Request.baseRequest().post('/login_check', userData)
+        Request.baseRequest().post('/login', userData)
             .then(response => {
                 LocalStorage.setAccessToken(response.data.token);
                 LocalStorage.setRefreshToken(response.data.refresh_token);
