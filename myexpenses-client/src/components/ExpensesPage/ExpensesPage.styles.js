@@ -10,6 +10,14 @@ const styles = {
     fontSize: '32px',
     fontWeight: bold
   },
+  loadingWrapper: {
+    marginTop: '64px',
+    textAlign: 'center'
+  },
+  emptyWrapper: {
+    marginTop: '64px',
+    textAlign: 'center'
+  },
   addButton: {
     display: 'flex',
     alignItems: 'center',

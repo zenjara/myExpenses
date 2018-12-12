@@ -50,7 +50,7 @@ class NewModal extends Component {
 
   render() {
     const { classes, hideModal, categories } = this.props;
-    const { expenseAmount, expenseCategory, expenseDescription } = this.state;
+    const { expenseAmount, expenseDescription } = this.state;
 
     const categoryOptions = categories.map(({ id, name }) => ({
       value: id,
@@ -67,6 +67,7 @@ class NewModal extends Component {
                 <label>EXPENSE AMOUNT</label>
                 <input
                   type="number"
+                  placeholder="Add expense amount"
                   className={classes.modalInput}
                   value={expenseAmount}
                   onChange={event => {
