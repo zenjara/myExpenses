@@ -123,15 +123,20 @@ class ExpensesPage extends Component {
     return (
       <div className={classes.emptyWrapper}>
         <span>
-          You haven't added any expense. Click on the ➕ button in the bottom
-          right corner to add new expense.
+          You haven't added any expense. Click on the
+          <span role="img" aria-label="plus icon">
+            &nbsp;➕&nbsp;
+          </span>
+          button in the bottom right corner to add new expense.
         </span>
       </div>
     );
   }
 
   renderExpenses() {
-    return this.state.expenses.length ? (
+    const { expenses } = this.state;
+
+    return expenses && expenses.length ? (
       <MeCard>{this.renderExpensesList()}</MeCard>
     ) : (
       this.renderEmptyState()
