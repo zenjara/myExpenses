@@ -6,8 +6,8 @@ const LogoIcon = props => {
     <svg
       id="svg"
       version="1.1"
-      width={props.size || '140'}
-      height={props.size || '140'}
+      width={props.size}
+      height={props.size}
       viewBox="0 0 400 400"
     >
       <g id="svgg">
@@ -49,6 +49,10 @@ const LogoIcon = props => {
       </g>
     </svg>
   );
+};
+
+LogoIcon.defaultProp = {
+  size: '140'
 };
 
 LogoIcon.propTypes = {

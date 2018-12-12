@@ -6,6 +6,7 @@ import SidebarItem from '../SidebarItem';
 import withHover from '../../Shared/HOCs/withHover';
 import LogoutIcon from '../../Shared/Icons/LogoutIcon';
 import userDefaultAvatar from '../../../assets/images/user-avatar-default.png';
+import LocalStorage from '../../../localStorage';
 import styles from './SidebarFooter.styles';
 
 class SidebarFooter extends Component {
@@ -17,6 +18,11 @@ class SidebarFooter extends Component {
 
   handleOnClickFooter() {
     this.props.handleOnClickFooter();
+  }
+
+  handleLogout() {
+    LocalStorage.clearTokens();
+    window.location.href = '/login';
   }
 
   renderFooterItems() {
