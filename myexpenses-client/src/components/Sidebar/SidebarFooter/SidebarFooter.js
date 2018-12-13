@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
+import { connect } from 'react-redux';
 
+import { unauthUser } from '../../../actions/auth';
 import ArrowDownIcon from '../../Shared/Icons/ArrowDownIcon';
 import SidebarItem from '../SidebarItem';
 import withHover from '../../Shared/HOCs/withHover';
@@ -23,7 +25,7 @@ class SidebarFooter extends Component {
 
   handleLogout() {
     LocalStorage.clearTokens();
-    this.props.history.push('/login');
+    this.props.unauthUser();
   }
 
   renderFooterItems() {
@@ -101,5 +103,10 @@ class SidebarFooter extends Component {
     );
   }
 }
+
+SidebarFooter = connect(
+  null,
+  { unauthUser }
+)(SidebarFooter);
 
 export default injectSheet(styles)(SidebarFooter);

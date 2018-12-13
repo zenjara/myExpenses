@@ -2,19 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import store from './store';
+import { Provider } from 'react-redux';
 
 import 'normalize.css';
 import './styles/index.css';
 import './styles/fonts.css';
 
 import App from './components/App';
+import LocalStorage from './localStorage';
+import { AUTH_USER } from './types/auth.types';
 
 const Router = window.require ? MemoryRouter : BrowserRouter;
 
+const accessToken = LocalStorage.getAccessToken();
+if (accessToken) {
+  store.dispatch({ type: AUTH_USER });
+}
+
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

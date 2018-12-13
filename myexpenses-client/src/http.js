@@ -2,7 +2,7 @@ import axios from 'axios';
 import Configuration from './configuration';
 import LocalStorage from './localStorage';
 
-const accessToken = LocalStorage.getAccessToken();
+const accessToken = () => LocalStorage.getAccessToken();
 
 const instance = axios.create({
   baseURL: `${Configuration.backendEndpoint}/api/v1`,
@@ -11,7 +11,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function(config) {
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    config.headers['Authorization'] = `Bearer ${accessToken()}`;
     return config;
   },
   function(error) {

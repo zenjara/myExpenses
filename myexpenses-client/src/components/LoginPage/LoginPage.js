@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { authUser } from '../../actions/auth';
 import { login } from './Login.data';
 import LogoIcon from '../Shared/Icons/LogoMyExpenses';
 import MeButton from '../Shared/MeButton/MeButton';
@@ -21,10 +23,18 @@ class LoginPage extends Component {
     const { email, password } = this.state;
     this.setState({ submitting: true });
 
-    login(email, password).then(res => {
-      LocalStorage.setAccessToken(res.data.token);
-      this.setState({ submitting: false });
-    });
+    login(email, password)
+      .then(res => {
+        LocalStorage.setAccessToken(res.data.token);
+        this.setState({ submitting: false });
+        this.props.authUser();
+      })
+      .catch(err => {
+        const errorMessage = Object.keys(err.response.data.error)
+          .map(errorKey => `${errorKey} - ${err.response.data.error[errorKey]}`)
+          .join('; ');
+        alert(errorMessage);
+      });
   }
 
   render() {
@@ -70,5 +80,10 @@ class LoginPage extends Component {
     );
   }
 }
+
+LoginPage = connect(
+  null,
+  { authUser }
+)(LoginPage);
 
 export default injectSheet(styles)(LoginPage);
