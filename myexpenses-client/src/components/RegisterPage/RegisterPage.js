@@ -32,6 +32,7 @@ class RegisterPage extends Component {
 
     this.setState({ submitting: true });
     register(name, email, password).then(() => {
+      this.setState({ submitting: false });
       alert('User successfully created!');
       this.props.history.push('/login');
     });
