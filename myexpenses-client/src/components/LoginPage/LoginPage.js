@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
 
 import { login } from './Login.data';
 import LogoIcon from '../Shared/Icons/LogoMyExpenses';
@@ -21,7 +22,7 @@ class LoginPage extends Component {
     this.setState({ submitting: true });
 
     login(email, password).then(res => {
-      LocalStorage.setAccessToken(res.token);
+      LocalStorage.setAccessToken(res.data.token);
       this.setState({ submitting: false });
     });
   }
@@ -57,6 +58,7 @@ class LoginPage extends Component {
                     }
                   />
                   <div className={classes.actionsContainer}>
+                    <Link to="/register">New Member?</Link>
                     <MeButton text="LOG IN" />
                   </div>
                 </fieldset>

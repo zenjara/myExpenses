@@ -14,6 +14,7 @@ class SidebarFooter extends Component {
     super(props);
 
     this.handleOnClickFooter = this.handleOnClickFooter.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleOnClickFooter() {
@@ -22,7 +23,7 @@ class SidebarFooter extends Component {
 
   handleLogout() {
     LocalStorage.clearTokens();
-    window.location.href = '/login';
+    this.props.history.push('/login');
   }
 
   renderFooterItems() {
