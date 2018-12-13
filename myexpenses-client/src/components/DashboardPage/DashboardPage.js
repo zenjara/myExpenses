@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import { getDashboardStats } from './DashboardPage.data';
+import { getDashboardMetrics } from './DashboardPage.data';
 import MeCard from '../Shared/MeCard';
 import LoadingSpinner from '../Shared/Icons/LoadingSpinner';
 import styles from './DashboardPage.styles';
@@ -12,14 +12,25 @@ class DashboardPage extends Component {
 
     this.state = {
       loading: true,
-      stats: []
+      dailyLimit: null,
+      dailyExpenses: null,
+      monthlyLimit: null,
+      monthlyExpenses: null
     };
   }
 
   componentDidMount() {
-    getDashboardStats().then(res =>
-      this.setState({ stats: res, loading: false })
-    );
+    getDashboardMetrics().then(res => {
+      const { dailyLimit, dailyExpenses, monthlyLimit, monthlyExpenses } = res;
+
+      this.setState({
+        dailyLimit,
+        dailyExpenses,
+        monthlyLimit,
+        monthlyExpenses,
+        loading: false
+      });
+    });
   }
 
   renderStatCard(title, limit, expenses) {
@@ -58,7 +69,26 @@ class DashboardPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { loading, stats } = this.state;
+    const {
+      loading,
+      dailyLimit,
+      dailyExpenses,
+      monthlyLimit,
+      monthlyExpenses
+    } = this.state;
+
+    const dailyStatsTitle = `Daily stats (${new Date().toLocaleString('us', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    })})`;
+    const monthlyStatsTitle = `Monthly stats (${new Date().toLocaleString(
+      'us',
+      {
+        month: 'short',
+        year: 'numeric'
+      }
+    )})`;
 
     return (
       <div className={classes.dashboardPage}>
@@ -69,10 +99,18 @@ class DashboardPage extends Component {
           ) : (
             <div className={classes.dashboardStats}>
               <div className={classes.dailyStatsWrapper}>
-                {this.renderStatCard('Daily stats', 200, 400)}
+                {this.renderStatCard(
+                  dailyStatsTitle,
+                  dailyLimit,
+                  dailyExpenses
+                )}
               </div>
               <div className={classes.monthlyStatsWrapper}>
-                {this.renderStatCard('Monthly stats', 3500, 1560)}
+                {this.renderStatCard(
+                  monthlyStatsTitle,
+                  monthlyLimit,
+                  monthlyExpenses
+                )}
               </div>
             </div>
           )}
