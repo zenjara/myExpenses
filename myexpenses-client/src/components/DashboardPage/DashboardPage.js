@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import { getDashboardMatrics } from './DashboardPage.data';
+import { getDashboardMetrics } from './DashboardPage.data';
 import MeCard from '../Shared/MeCard';
 import LoadingSpinner from '../Shared/Icons/LoadingSpinner';
 import styles from './DashboardPage.styles';
@@ -20,7 +20,7 @@ class DashboardPage extends Component {
   }
 
   componentDidMount() {
-    getDashboardMatrics().then(res => {
+    getDashboardMetrics().then(res => {
       const { dailyLimit, dailyExpenses, monthlyLimit, monthlyExpenses } = res;
 
       this.setState({
