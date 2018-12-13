@@ -93,6 +93,7 @@ class Sidebar extends Component {
           loading={loading}
           versionNumber={packageJson.version}
           isNavActive={this.isNavActive}
+          history={this.props.history}
         />
       </div>
     );

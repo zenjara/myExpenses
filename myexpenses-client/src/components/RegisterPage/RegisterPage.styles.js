@@ -1,24 +1,24 @@
 import { bold, myExpensesPurple } from '../../assets/shared-styles/general';
 
 const styles = {
-  loginPage: {
+  registerPage: {
     display: 'flex',
     alignItems: 'stretch',
     height: '100%',
     backgroundImage: `linear-gradient(141deg, ${myExpensesPurple} 0%, #572A34 51%, #4C2324 75%)`
   },
-  loginPageContentWrapper: {
+  registerPageContentWrapper: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexGrow: 1
   },
-  loginPageContent: {
+  registerPageContent: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: '45%',
-    height: '40%'
+    height: '50%'
   },
   verticalBorder: {
     height: '100%',
@@ -26,7 +26,7 @@ const styles = {
     borderRight: '1px solid #fff',
     margin: '0 32px'
   },
-  loginFormWrapper: {
+  registerFormWrapper: {
     '& h3': {
       marginTop: '0',
       color: '#fff',
