@@ -33,6 +33,7 @@ class LoginPage extends Component {
         const errorMessage = Object.keys(err.response.data.error)
           .map(errorKey => `${errorKey} - ${err.response.data.error[errorKey]}`)
           .join('; ');
+        this.setState({ submitting: false });
         alert(errorMessage);
       });
   }
