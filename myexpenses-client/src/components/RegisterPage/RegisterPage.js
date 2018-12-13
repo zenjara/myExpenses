@@ -31,11 +31,16 @@ class RegisterPage extends Component {
     }
 
     this.setState({ submitting: true });
-    register(name, email, password).then(() => {
-      this.setState({ submitting: false });
-      alert('User successfully created!');
-      this.props.history.push('/login');
-    });
+    register(name, email, password)
+      .then(() => {
+        alert('User successfully created!');
+        this.props.history.push('/login');
+      })
+      .catch(err => {
+        const errorMessage = `Error - ${err.response.data.email}`;
+        this.setState({ submitting: false });
+        alert(errorMessage);
+      });
   }
 
   render() {
