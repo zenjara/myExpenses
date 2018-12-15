@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import { getCategories, getExpenses, createExpense } from './ExpensesPage.data';
+import { getCategories } from '../ExpensesPage/ExpensesPage.data';
 import PlusIcon from '../Shared/Icons/PlusIcon';
 import MeModal from '../Shared/MeModal';
 import MeCard from '../Shared/MeCard';
 import { MODAL_NEW } from '../../types/modal.types';
 import LoadingSpinner from '../Shared/Icons/LoadingSpinner';
-import styles from './ExpensesPage.styles';
+import styles from './CategoriesPage.styles';
 
-class ExpensesPage extends Component {
+class CategoriesPage extends Component {
   constructor(props) {
     super(props);
 
     this.handleHideModal = this.handleHideModal.bind(this);
     this.handleShowModal = this.handleShowModal.bind(this);
-    this.onExpenseCreate = this.onExpenseCreate.bind(this);
 
     this.state = {
       loading: true,
       currentModal: null,
-      expenses: [],
       categories: []
     };
   }
 
   componentDidMount() {
     getCategories().then(categories => {
-      getExpenses().then(expenses =>
-        this.setState({ categories, expenses, loading: false })
-      );
+      this.setState({ categories, loading: false });
     });
   }
 
-  onExpenseCreate(expense) {
+  onCategoryCreate(expense) {
     const requestData = {
       amount: expense.expenseAmount,
       currency: 'HRK',
@@ -42,9 +38,9 @@ class ExpensesPage extends Component {
       expense_category_id: expense.expenseCategory
     };
 
-    createExpense(requestData).then(res =>
-      this.setState({ expenses: [res, ...this.state.expenses] })
-    );
+    // createExpense(requestData).then(res =>
+    //   this.setState({ expenses: [res, ...this.state.expenses] })
+    // );
     this.handleHideModal();
   }
 
@@ -56,8 +52,8 @@ class ExpensesPage extends Component {
     this.setState({ currentModal: modal });
   }
 
-  sortExpenses(expenses) {
-    return expenses.sort((prev, next) => (prev.date < next.date ? 1 : -1));
+  sortCategories(categories) {
+    return categories.sort((prev, next) => (prev.name > next.name ? 1 : -1));
   }
 
   renderNewModal() {
@@ -72,47 +68,27 @@ class ExpensesPage extends Component {
     );
   }
 
-  renderExpenseRow(expense) {
+  renderCategoriesList() {
     const { classes } = this.props;
     const { categories } = this.state;
 
-    return (
-      <tr key={`${expense.id}`}>
-        <td className={classes}>{`${expense.amount} ${expense.currency}`}</td>
-        <td>{new Date(expense.date).toLocaleDateString()}</td>
-        <td>
-          {
-            categories.find(category => {
-              return category.id === expense.expense_category_id;
-            }).name
-          }
-        </td>
-        <td>{expense.description || '\u2014'}</td>
-      </tr>
-    );
-  }
-
-  renderExpensesList() {
-    const { classes } = this.props;
-    const { expenses } = this.state;
-
-    const sortedExpenses = this.sortExpenses(expenses);
+    const sortedCategories = this.sortCategories(categories);
 
     return (
-      <div className={classes.expensesList}>
-        <table className={classes.expensesTable}>
-          <thead>
-            <tr>
-              <th className={classes.headerAmount}>Amount</th>
-              <th className={classes.headerDate}>Date</th>
-              <th className={classes.headerCategory}>Category</th>
-              <th className={classes.headerDescription}>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedExpenses.map(expense => this.renderExpenseRow(expense))}
-          </tbody>
-        </table>
+      <div className={classes.categoriesList}>
+        {sortedCategories.map(category => (
+          <div className={classes.categoryListItem}>
+            <div className={classes.categoryName}>{category.name}</div>
+            <div className={classes.categoryCreated}>
+              Date added:&nbsp;
+              {new Date(category.created_at).toLocaleString('us', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
@@ -123,21 +99,21 @@ class ExpensesPage extends Component {
     return (
       <div className={classes.emptyWrapper}>
         <span>
-          You haven't added any expense. Click on the
+          You haven't added any category. Click on the
           <span role="img" aria-label="plus icon">
             &nbsp;➕&nbsp;
           </span>
-          button in the bottom right corner to add new expense.
+          button in the bottom right corner to add new category.
         </span>
       </div>
     );
   }
 
-  renderExpenses() {
-    const { expenses } = this.state;
+  renderCategories() {
+    const { categories } = this.state;
 
-    return expenses && expenses.length ? (
-      <MeCard>{this.renderExpensesList()}</MeCard>
+    return categories && categories.length ? (
+      <MeCard>{this.renderCategoriesList()}</MeCard>
     ) : (
       this.renderEmptyState()
     );
@@ -158,9 +134,9 @@ class ExpensesPage extends Component {
     const { currentModal, loading } = this.state;
 
     return (
-      <div className={classes.expensesPage}>
-        <h2 className={classes.expensesPageTitle}>Expenses</h2>
-        {loading ? this.renderLoadingState() : this.renderExpenses()}
+      <div className={classes.categoriesPage}>
+        <h2 className={classes.categoriesPageTitle}>Categories</h2>
+        {loading ? this.renderLoadingState() : this.renderCategories()}
         <div
           className={classes.addButton}
           onClick={() => this.handleShowModal(MODAL_NEW)}
@@ -173,4 +149,4 @@ class ExpensesPage extends Component {
   }
 }
 
-export default injectSheet(styles)(ExpensesPage);
+export default injectSheet(styles)(CategoriesPage);

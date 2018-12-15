@@ -10,6 +10,7 @@ import SidebarFooter from './SidebarFooter';
 import withHover from '../Shared/HOCs/withHover/withHover';
 import DashboardsIcon from '../Shared/Icons/DashboardsIcon';
 import ExpensesIcon from '../Shared/Icons/ExpensesIcon';
+import CategoriesIcon from '../Shared/Icons/CategoriesIcon';
 import UserIcon from '../Shared/Icons/UserIcon';
 import UploadIcon from '../Shared/Icons/UploadIcon';
 import styles from './Sidebar.styles';
@@ -47,6 +48,7 @@ class Sidebar extends Component {
   renderSidebarItems() {
     const DashboardsItem = withHover(SidebarItem(DashboardsIcon));
     const ExpensesItem = withHover(SidebarItem(ExpensesIcon));
+    const CategoriesItem = withHover(SidebarItem(CategoriesIcon));
     const ProfileItem = withHover(SidebarItem(UserIcon));
     const UploadItem = withHover(SidebarItem(UploadIcon));
 
@@ -60,6 +62,11 @@ class Sidebar extends Component {
         <ExpensesItem
           text="EXPENSES"
           href="/expenses"
+          isNavActive={this.isNavActive}
+        />
+        <CategoriesItem
+          text="CATEGORIES"
+          href="/categories"
           isNavActive={this.isNavActive}
         />
         <ProfileItem

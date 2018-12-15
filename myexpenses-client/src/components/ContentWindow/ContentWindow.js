@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import DashboardPage from '../DashboardPage';
 import ExpensesPage from '../ExpensesPage';
+import CategoriesPage from '../CategoriesPage';
 import ProfilePage from '../ProfilePage';
 import UploadPage from '../UploadPage';
 import styles from './ContentWindow.styles';
@@ -16,6 +17,7 @@ const ContentWindow = props => {
       <Switch>
         <Route exact path="/" component={DashboardPage} />
         <Route path="/expenses" component={ExpensesPage} />
+        <Route path="/categories" component={CategoriesPage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/upload" component={UploadPage} />
       </Switch>
