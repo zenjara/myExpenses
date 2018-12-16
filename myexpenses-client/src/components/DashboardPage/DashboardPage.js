@@ -6,6 +6,8 @@ import MeCard from '../Shared/MeCard';
 import LoadingSpinner from '../Shared/Icons/LoadingSpinner';
 import styles from './DashboardPage.styles';
 
+// TODO - implement blank daily/monthly Limits (error appears when new user logs in)
+
 class DashboardPage extends Component {
   constructor(props) {
     super(props);

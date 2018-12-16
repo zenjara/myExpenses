@@ -59,6 +59,7 @@ class LoginPage extends Component {
                     value={email}
                     placeholder="Email"
                     onChange={ev => this.setState({ email: ev.target.value })}
+                    autoFocus
                   />
                   <input
                     type="password"
@@ -70,7 +71,7 @@ class LoginPage extends Component {
                   />
                   <div className={classes.actionsContainer}>
                     <Link to="/register">New Member?</Link>
-                    <MeButton text="LOG IN" />
+                    <MeButton type="submit" text="LOG IN" />
                   </div>
                 </fieldset>
               </form>

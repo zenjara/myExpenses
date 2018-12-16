@@ -28,7 +28,9 @@ instance.interceptors.response.use(
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
 
-      LocalStorage.clearTokens();
+      if (error.response.status === 401) {
+        LocalStorage.clearTokens();
+      }
       // window.location.href = '/login'
 
       //*** REFRESH TOKEN LOGIC - when refresh token gets implemented ***//
