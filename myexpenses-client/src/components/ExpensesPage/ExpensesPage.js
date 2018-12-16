@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import { getCategories, getExpenses, createExpense } from './ExpensesPage.data';
+import { getExpenses, createExpense } from './ExpensesPage.data';
+import { getCategories } from '../CategoriesPage/CategoriesPage.data';
 import PlusIcon from '../Shared/Icons/PlusIcon';
 import MeModal from '../Shared/MeModal';
 import MeCard from '../Shared/MeCard';

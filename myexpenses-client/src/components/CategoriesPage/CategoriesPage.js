@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import { getCategories } from '../ExpensesPage/ExpensesPage.data';
+import { createCategory, getCategories } from './CategoriesPage.data';
 import PlusIcon from '../Shared/Icons/PlusIcon';
 import MeModal from '../Shared/MeModal';
 import MeCard from '../Shared/MeCard';
-import { MODAL_NEW } from '../../types/modal.types';
+import { MODAL_NEW_CATEGORY } from '../../types/modal.types';
 import LoadingSpinner from '../Shared/Icons/LoadingSpinner';
 import styles from './CategoriesPage.styles';
 
@@ -15,6 +15,7 @@ class CategoriesPage extends Component {
 
     this.handleHideModal = this.handleHideModal.bind(this);
     this.handleShowModal = this.handleShowModal.bind(this);
+    this.onCategoryCreate = this.onCategoryCreate.bind(this);
 
     this.state = {
       loading: true,
@@ -29,18 +30,14 @@ class CategoriesPage extends Component {
     });
   }
 
-  onCategoryCreate(expense) {
+  onCategoryCreate({ categoryName }) {
     const requestData = {
-      amount: expense.expenseAmount,
-      currency: 'HRK',
-      date: new Date().toLocaleDateString(),
-      description: expense.expenseDescription,
-      expense_category_id: expense.expenseCategory
+      name: categoryName
     };
 
-    // createExpense(requestData).then(res =>
-    //   this.setState({ expenses: [res, ...this.state.expenses] })
-    // );
+    createCategory(requestData).then(res =>
+      this.setState({ categories: [res, ...this.state.categories] })
+    );
     this.handleHideModal();
   }
 
@@ -56,14 +53,13 @@ class CategoriesPage extends Component {
     return categories.sort((prev, next) => (prev.name > next.name ? 1 : -1));
   }
 
-  renderNewModal() {
+  renderNewCategoryModal() {
     return (
       <MeModal
-        modalType={MODAL_NEW}
+        modalType={MODAL_NEW_CATEGORY}
         width="640px"
         hideModal={this.handleHideModal}
-        createExpense={this.onExpenseCreate}
-        categories={this.state.categories}
+        createCategory={this.onCategoryCreate}
       />
     );
   }
@@ -77,7 +73,10 @@ class CategoriesPage extends Component {
     return (
       <div className={classes.categoriesList}>
         {sortedCategories.map(category => (
-          <div className={classes.categoryListItem}>
+          <div
+            className={classes.categoryListItem}
+            key={`category-${category.name}`}
+          >
             <div className={classes.categoryName}>{category.name}</div>
             <div className={classes.categoryCreated}>
               Date added:&nbsp;
@@ -139,11 +138,13 @@ class CategoriesPage extends Component {
         {loading ? this.renderLoadingState() : this.renderCategories()}
         <div
           className={classes.addButton}
-          onClick={() => this.handleShowModal(MODAL_NEW)}
+          onClick={() => this.handleShowModal(MODAL_NEW_CATEGORY)}
         >
           <PlusIcon />
         </div>
-        {currentModal === MODAL_NEW ? this.renderNewModal() : null}
+        {currentModal === MODAL_NEW_CATEGORY
+          ? this.renderNewCategoryModal()
+          : null}
       </div>
     );
   }

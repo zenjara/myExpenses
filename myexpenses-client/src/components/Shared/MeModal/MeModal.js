@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 
-import { MODAL_NEW } from '../../../types/modal.types';
+import { MODAL_NEW, MODAL_NEW_CATEGORY } from '../../../types/modal.types';
 import NewModal from '../Modals/NewModal';
+import NewCategoryModal from '../Modals/NewCategoryModal';
 import styles from './MeModal.styles';
 
 class EcModal extends Component {
@@ -46,6 +47,8 @@ class EcModal extends Component {
     switch (modalType) {
       case MODAL_NEW:
         return <NewModal {...this.props} />;
+      case MODAL_NEW_CATEGORY:
+        return <NewCategoryModal {...this.props} />;
       default:
         return null;
     }
