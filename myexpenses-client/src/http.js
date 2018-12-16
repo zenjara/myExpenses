@@ -62,3 +62,7 @@ export function get(url, config) {
 export function post(url, data, config) {
   return instance.post(url, data, config);
 }
+
+export function httpDelete(url, config) {
+  return instance.delete(url, config);
+}
