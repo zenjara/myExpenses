@@ -6,10 +6,14 @@ import styles from './MeButton.styles';
 
 class MeButton extends Component {
   render() {
-    const { text, classes, onClick } = this.props;
+    const { text, classes, onClick, type } = this.props;
 
     return (
-      <button className={classes.meButton} {...onClick && { onClick }}>
+      <button
+        className={classes.meButton}
+        {...onClick && { onClick }}
+        type={type}
+      >
         <span className={classes.meButtonText}>{text ? text : null}</span>
       </button>
     );
@@ -17,12 +21,14 @@ class MeButton extends Component {
 }
 
 MeButton.defaultProps = {
-  height: '36px'
+  height: '36px',
+  type: 'button'
 };
 
 MeButton.propTypes = {
   disabled: PropTypes.bool,
   text: PropTypes.string,
+  type: PropTypes.string,
   onClick: PropTypes.func,
   width: PropTypes.string,
   height: PropTypes.string,

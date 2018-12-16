@@ -70,6 +70,7 @@ class RegisterPage extends Component {
                     value={name}
                     placeholder="Name"
                     onChange={ev => this.setState({ name: ev.target.value })}
+                    autoFocus
                   />
                   <input
                     type="text"
@@ -95,7 +96,7 @@ class RegisterPage extends Component {
                   />
                   <div className={classes.actionsContainer}>
                     <Link to="/login">Already a Member?</Link>
-                    <MeButton text="REGISTER" />
+                    <MeButton type="submit" text="REGISTER" />
                   </div>
                 </fieldset>
               </form>

@@ -11,8 +11,7 @@ class NewModal extends Component {
   constructor(props) {
     super(props);
 
-    this.handleOnKeyboardPress = this.handleOnKeyboardPress.bind(this);
-    this.handleActionClick = this.handleActionClick.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
     this.state = {
       expenseAmount: '',
@@ -21,13 +20,7 @@ class NewModal extends Component {
     };
   }
 
-  handleOnKeyboardPress(event) {
-    if (event.keyCode === 13) {
-      this.handleActionClick();
-    }
-  }
-
-  handleActionClick() {
+  handleFormSubmit() {
     const { expenseAmount, expenseCategory, expenseDescription } = this.state;
 
     this.props.createExpense({
@@ -59,58 +52,59 @@ class NewModal extends Component {
 
     return (
       <MeCard>
-        <div className={classes.modalBody}>
-          <div className={classes.modalBodyContent}>
-            <div className={classes.modalBodyTitle}>New Expense</div>
-            <div className={classes.fieldInputs}>
+        <form onSubmit={this.handleFormSubmit}>
+          <div className={classes.modalBody}>
+            <div className={classes.modalBodyContent}>
+              <div className={classes.modalBodyTitle}>New Expense</div>
+              <div className={classes.fieldInputs}>
+                <div className={classes.formField}>
+                  <label>EXPENSE AMOUNT</label>
+                  <input
+                    type="number"
+                    placeholder="Add expense amount"
+                    className={classes.modalInput}
+                    value={expenseAmount}
+                    onChange={event => {
+                      this.handleInputChange(
+                        event.target.value,
+                        'expenseAmount'
+                      );
+                    }}
+                    autoFocus
+                  />
+                </div>
+                <div className={classes.formField}>
+                  <label>EXPENSE CATEGORY</label>
+                  <MeSelect
+                    width="240px"
+                    isClearable
+                    options={categoryOptions}
+                    placeholder="Select category"
+                    onChange={option => this.handleSelectChange(option.value)}
+                  />
+                </div>
+              </div>
               <div className={classes.formField}>
-                <label>EXPENSE AMOUNT</label>
-                <input
-                  type="number"
-                  placeholder="Add expense amount"
+                <label>EXPENSE DESCRIPTION</label>
+                <textarea
                   className={classes.modalInput}
-                  value={expenseAmount}
+                  value={expenseDescription}
                   onChange={event => {
-                    this.handleInputChange(event.target.value, 'expenseAmount');
+                    this.handleInputChange(
+                      event.target.value,
+                      'expenseDescription'
+                    );
                   }}
-                />
-              </div>
-              <div className={classes.formField}>
-                <label>EXPENSE CATEGORY</label>
-                <MeSelect
-                  width="240px"
-                  isClearable
-                  options={categoryOptions}
-                  placeholder="Select category"
-                  onChange={option => this.handleSelectChange(option.value)}
+                  rows="7"
                 />
               </div>
             </div>
-            <div className={classes.formField}>
-              <label>EXPENSE DESCRIPTION</label>
-              <textarea
-                className={classes.modalInput}
-                value={expenseDescription}
-                onChange={event => {
-                  this.handleInputChange(
-                    event.target.value,
-                    'expenseDescription'
-                  );
-                }}
-                rows="7"
-              />
+            <div className={classes.modalActions}>
+              <MeButton text="CANCEL" onClick={hideModal} />
+              <MeButton text="ADD" type="submit" purple width="80px" />
             </div>
           </div>
-          <div className={classes.modalActions}>
-            <MeButton text="CANCEL" onClick={hideModal} />
-            <MeButton
-              text="ADD"
-              purple
-              width="80px"
-              onClick={this.handleActionClick}
-            />
-          </div>
-        </div>
+        </form>
       </MeCard>
     );
   }

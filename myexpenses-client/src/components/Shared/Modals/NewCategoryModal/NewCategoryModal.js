@@ -10,8 +10,7 @@ class NewCategoryModal extends Component {
   constructor(props) {
     super(props);
 
-    this.handleOnKeyboardPress = this.handleOnKeyboardPress.bind(this);
-    this.handleActionClick = this.handleActionClick.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
     this.state = {
@@ -19,13 +18,8 @@ class NewCategoryModal extends Component {
     };
   }
 
-  handleOnKeyboardPress(event) {
-    if (event.keyCode === 13) {
-      this.handleActionClick();
-    }
-  }
-
-  handleActionClick() {
+  handleFormSubmit(event) {
+    event.preventDefault();
     const { categoryName } = this.state;
 
     this.props.createCategory({ categoryName });
@@ -42,30 +36,28 @@ class NewCategoryModal extends Component {
     return (
       <MeCard>
         <div className={classes.modalBody}>
-          <div className={classes.modalBodyContent}>
-            <div className={classes.modalBodyTitle}>New Category</div>
-            <div className={classes.fieldInputs}>
-              <div className={classes.formField}>
-                <label>CATEGORY NAME</label>
-                <input
-                  type="text"
-                  placeholder="Enter category name"
-                  className={classes.modalInput}
-                  value={categoryName}
-                  onChange={this.handleInputChange}
-                />
+          <form onSubmit={this.handleFormSubmit}>
+            <div className={classes.modalBodyContent}>
+              <div className={classes.modalBodyTitle}>New Category</div>
+              <div className={classes.fieldInputs}>
+                <div className={classes.formField}>
+                  <label>CATEGORY NAME</label>
+                  <input
+                    type="text"
+                    placeholder="Enter category name"
+                    className={classes.modalInput}
+                    value={categoryName}
+                    onChange={this.handleInputChange}
+                    autoFocus
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div className={classes.modalActions}>
-            <MeButton text="CANCEL" onClick={hideModal} />
-            <MeButton
-              text="ADD"
-              purple
-              width="80px"
-              onClick={this.handleActionClick}
-            />
-          </div>
+            <div className={classes.modalActions}>
+              <MeButton text="CANCEL" type="button" onClick={hideModal} />
+              <MeButton text="ADD" type="submit" purple width="80px" />
+            </div>
+          </form>
         </div>
       </MeCard>
     );
