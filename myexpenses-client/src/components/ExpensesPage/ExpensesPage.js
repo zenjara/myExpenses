@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import { getExpenses, createExpense } from './ExpensesPage.data';
+import { getExpenses, createExpense, deleteExpense } from './ExpensesPage.data';
 import { getCategories } from '../CategoriesPage/CategoriesPage.data';
 import PlusIcon from '../Shared/Icons/PlusIcon';
 import MeModal from '../Shared/MeModal';
@@ -49,6 +49,22 @@ class ExpensesPage extends Component {
     this.handleHideModal();
   }
 
+  onDeleteClick(expenseId) {
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this expense?'
+    );
+
+    if (confirmation) {
+      deleteExpense(expenseId).then(() => {
+        const newExpenses = this.state.expenses.filter(
+          exp => exp.id !== expenseId
+        );
+
+        this.setState({ expenses: newExpenses });
+      });
+    }
+  }
+
   handleHideModal() {
     this.setState({ currentModal: null });
   }
@@ -79,7 +95,7 @@ class ExpensesPage extends Component {
 
     return (
       <tr key={`${expense.id}`}>
-        <td className={classes}>{`${expense.amount} ${expense.currency}`}</td>
+        <td>{`${expense.amount} ${expense.currency}`}</td>
         <td>{new Date(expense.date).toLocaleDateString()}</td>
         <td>
           {
@@ -89,6 +105,12 @@ class ExpensesPage extends Component {
           }
         </td>
         <td>{expense.description || '\u2014'}</td>
+        <td
+          className={classes.deleteAction}
+          onClick={() => this.onDeleteClick(expense.id)}
+        >
+          Delete
+        </td>
       </tr>
     );
   }
@@ -108,6 +130,7 @@ class ExpensesPage extends Component {
               <th className={classes.headerDate}>Date</th>
               <th className={classes.headerCategory}>Category</th>
               <th className={classes.headerDescription}>Description</th>
+              <th className={classes.headerAction} />
             </tr>
           </thead>
           <tbody>

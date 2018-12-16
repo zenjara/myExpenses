@@ -47,6 +47,11 @@ const styles = {
     },
     '& tbody': {
       fontSize: '16px',
+      '& tr': {
+        '&:hover': {
+          backgroundColor: 'rgba(0, 0, 0, 0.05)'
+        }
+      },
       '& td': {
         display: 'table-cell',
         padding: '12px 0'
@@ -56,9 +61,18 @@ const styles = {
       borderBottom: 'solid 1px rgba(0, 0, 0, 0.1)'
     }
   },
+  deleteAction: {
+    textAlign: 'center',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#794C68',
+      textDecoration: 'underline'
+    }
+  },
   headerAmount: { width: '170px' },
   headerDate: { width: '150px' },
-  headerCategory: { width: '240px' }
+  headerCategory: { width: '240px' },
+  headerAction: { width: '120px' }
 };
 
 export default styles;
