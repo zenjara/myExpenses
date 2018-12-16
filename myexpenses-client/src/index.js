@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+// Using HashRouter instead of BrowserRouter to get it working with
+// deployment on a static server (surge.sh)
+// Rollback to BrowserRouter when moving to a new deployment service
+import { HashRouter, MemoryRouter } from 'react-router-dom';
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -13,7 +16,7 @@ import App from './components/App';
 import LocalStorage from './localStorage';
 import { AUTH_USER } from './types/auth.types';
 
-const Router = window.require ? MemoryRouter : BrowserRouter;
+const Router = window.require ? MemoryRouter : HashRouter;
 
 const accessToken = LocalStorage.getAccessToken();
 if (accessToken) {
