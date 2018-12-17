@@ -1,4 +1,4 @@
-class ExpenseCategoriesController < ApplicationController
+class Api::V1::ExpenseCategoriesController < ApplicationController
 
   def create
     @expense_category = @current_user.expense_categories.new(name: params[:name])
