@@ -1,3 +1,3 @@
 class DailyLimitSerializer < ActiveModel::Serializer
-	attributes :amount, :currency
+  attributes :amount, :currency
 end
