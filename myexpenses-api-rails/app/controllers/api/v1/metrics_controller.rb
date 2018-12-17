@@ -1,4 +1,4 @@
-class MetricsController < ApplicationController
+class Api::V1::MetricsController < ApplicationController
   def expense_calculations
     beginning_of_month = Date.today.beginning_of_month
     beginning_of_next_month = beginning_of_month.next_month

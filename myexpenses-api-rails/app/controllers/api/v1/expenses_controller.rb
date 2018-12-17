@@ -1,11 +1,11 @@
-class ExpensesController < ApplicationController
+class Api::V1::ExpensesController < ApplicationController
+  before_action :set_expense, only: %i[show update destroy]
 
   def index
     render status: 200, json: @current_user.expenses
   end
 
   def show
-    @expense = @current_user.expenses.find_by_id(params[:id])
     if @expense
       render status: 200, json: @expense
     else
@@ -23,7 +23,6 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    @expense = @current_user.expenses.find_by_id(params[:id])
     if @expense
       @expense.update_attributes(expense_params)
       render status: 200, json: @expense
@@ -33,7 +32,6 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-    @expense = @current_user.expenses.find_by_id(params[:id])
     if @expense
       @expense.destroy
       render status: 204
@@ -43,6 +41,10 @@ class ExpensesController < ApplicationController
   end
 
   private
+
+  def set_expense
+    @expense = Expense.find_by_id(params[:id])
+  end
 
   def expense_params
     params.permit(
