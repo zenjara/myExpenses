@@ -38,7 +38,7 @@ class ExpensesPage extends Component {
     const requestData = {
       amount: expense.expenseAmount,
       currency: 'HRK',
-      date: new Date().toLocaleDateString(),
+      date: new Date().toISOString(),
       description: expense.expenseDescription,
       expense_category_id: expense.expenseCategory
     };
