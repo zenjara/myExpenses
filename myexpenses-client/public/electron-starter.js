@@ -4,13 +4,25 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 
+// // Built and packaged app will have the env file present in ../build/.env (obviously, it will not work for served app but that is not important)
+// const result = require('dotenv').config({
+//   path: path.resolve(__dirname, '../build/.env')
+// });
+// if (result.error) {
+//   console.log('dotenv did not find any .env files', result.error);
+// } else {
+//   console.log('dotenv found .env', result.parsed);
+// }
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden'
+  });
 
   // and load the index.html of the app.
   const startUrl =
@@ -20,10 +32,11 @@ function createWindow() {
       protocol: 'file:',
       slashes: true
     });
+  mainWindow.maximize();
   mainWindow.loadURL(startUrl);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

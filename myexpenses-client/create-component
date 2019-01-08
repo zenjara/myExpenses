@@ -1,0 +1,44 @@
+#!/bin/bash
+
+name=$1
+component_path=$2
+dirpath=$PWD
+
+if [[ $# -eq 0 ]]; then
+	echo "Please provide component name and its path"
+	exit 0
+elif [[ $# -eq 1 ]]; then
+	echo "Please provide both component name and its path"
+	exit 0
+fi
+
+echo Creating $name component...
+cd $dirpath/src/components/$component_path
+mkdir $name && cd $_
+touch index.js $name.js $name.styles.js
+
+echo "import ${name} from './${name}'"$'\n' >> index.js
+echo "export default ${name}" >> index.js
+
+echo "import React, { Component } from 'react';" >> $name.js
+echo "import injectSheet from 'react-jss';"$'\n' >> $name.js
+echo "import styles from './${name}.styles';"$'\n' >> $name.js
+
+echo "class ${name} extends Component {
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>${name}</div>
+    );
+  }
+}"$'\n' >> $name.js
+
+echo "export default injectSheet(styles)(${name});" >> $name.js
+
+
+echo "const styles = {};
+
+export default styles;" >> $name.styles.js
+
+echo done!

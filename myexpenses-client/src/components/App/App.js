@@ -1,25 +1,50 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit super <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import LoginPage from '../LoginPage';
+import RegisterPage from '../RegisterPage';
+import MainLayout from '../MainLayout';
+
+const App = props => {
+  return (
+    <Switch>
+      <Route
+        path="/login"
+        render={routeProps =>
+          props.authenticated ? (
+            <Redirect to="/" />
+          ) : (
+            <LoginPage {...routeProps} />
+          )
+        }
+      />
+      <Route
+        path="/register"
+        render={routeProps =>
+          props.authenticated ? (
+            <Redirect to="/" />
+          ) : (
+            <RegisterPage {...routeProps} />
+          )
+        }
+      />
+      <Route
+        path="/"
+        render={routeProps =>
+          props.authenticated ? (
+            <MainLayout {...routeProps} />
+          ) : (
+            <Redirect to="/login" />
+          )
+        }
+      />
+    </Switch>
+  );
+};
+
+function mapStateToProps({ auth }) {
+  return { authenticated: auth.authenticated };
 }
 
-export default App;
+export default withRouter(connect(mapStateToProps)(App));
