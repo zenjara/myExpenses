@@ -13,4 +13,14 @@ class Api::V1::ExpenseCategoriesController < ApplicationController
     render status: 200, json: @current_user.expense_categories
   end
 
+  def destroy
+    @expense_category = ExpenseCategory.find_by_id(params[:id])
+    if @expense_category
+      @expense_category.destroy
+      render status: 204
+    else
+      render status: 400, json: { 'errors' => "No expense category found with ID #{params[:id]}" }
+    end
+  end
+
 end

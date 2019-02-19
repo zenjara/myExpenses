@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :expenses
-      resources :expense_categories, only: ['index', 'create']
+      resources :expense_categories, only: %w(index create destroy)
 
       # User profile
       post 'register', to: 'users#register'
