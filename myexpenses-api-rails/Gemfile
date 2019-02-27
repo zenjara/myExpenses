@@ -38,6 +38,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem "dry-validation"
+  gem 'simplecov'
+  gem "rubycritic"
 	gem 'byebug', platform: :mri
 end
 

@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
       response = { message: 'User created successfully' }
       render json: response, status: :created
     else
-      render json: @user.errors, status: :bad
+      render json: @user.errors, status: :bad_request
     end
   end
 
@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def set_daily_limit
-    currency = params[:currency] ? params[:currency] : 'HRK'
+    currency = fetch_or_assign_currency
     @daily_limit = @current_user.build_daily_limit(amount: params[:amount], currency: currency)
     if @daily_limit.save
       render status: 201, json: @daily_limit
@@ -33,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def set_monthly_limit
-    currency = params[:currency] ? params[:currency] : 'HRK'
+    currency = fetch_or_assign_currency
     @monthly_limit = @current_user.build_monthly_limit(amount: params[:amount], currency: currency)
     if @monthly_limit.save
       render status: 201, json: @monthly_limit
@@ -63,5 +63,9 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { error: command.errors }, status: :unauthorized
     end
+  end
+
+  def fetch_or_assign_currency
+    params[:currency] ? params[:currency] : 'HRK'
   end
 end
