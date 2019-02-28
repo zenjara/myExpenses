@@ -1,0 +1,80 @@
+# Web Team(tm) Official Rubocop Rules(c)
+#
+# Edit these according to your preferences.
+
+# 80 is the default, this option is provided here so that it can easily be
+# changed if you hate well formatted code.
+Metrics/LineLength:
+  Max: 80 # default: 80
+
+# You should always explicitly nest namespaced classes. However, if you
+# understand the intricacies of Ruby's constant lookup and you vouch for
+# everyone else working with you to understand them as well, you can disable
+# this. Reference: https://cirw.in/blog/constant-lookup.html
+Style/ClassAndModuleChildren:
+  Enabled: true # default: true
+
+# Frozen string literals are going to be the default with Ruby 3.0, so you
+# should keep them on. However, if you hate forward compability, you can disable
+# this.
+Style/FrozenStringLiteralComment:
+  Enabled: true # default: true
+
+# ======================================
+# You should not edit beyond this point.
+# ======================================
+
+Rails:
+  Enabled: true
+
+# Don't lint any gems, any binstubs and database migration files
+# We assume gems are fine as they are, binstubs are specific due to their nature
+# and migration files (especially schema.rb) can be impossible to properly
+# format and still keep full Rails functionality.
+AllCops:
+  Exclude:
+  - 'db/**/*'
+  - 'bin/**/*'
+  - 'vendor/**/*'
+
+# Rake files and RSpec files generally have long blocks because of their DSL, so
+# disable that lint.
+# However, you should strive to keep RSpec describe blocks concise (use several
+# describe blocks per file instead of stuffing everything inside of one)
+Metrics/BlockLength:
+  Exclude:
+  - Rakefile
+  - '**/*.rake'
+  - spec/**/*.rb
+  - config/routes.rb
+
+# No need to meticulously comment every single class in a framework as
+# standardised as Rails.
+Style/Documentation:
+  Enabled: false # default: true
+
+# {a: 'b', 'c' => 'd'} looks ugly, stick with one or the other.
+Style/HashSyntax:
+  EnforcedStyle: 'ruby19_no_mixed_keys' # default: ruby19
+
+# You should always specify the error that you are raising.
+# good: raise ArgumentError, 'Error message'
+# bad: raise 'Error message'
+Style/ImplicitRuntimeError:
+  Enabled: true # default: false
+
+# send can be redefined in a class, if you have to metaprogram use __send__ or
+# public_send
+Style/Send:
+  Enabled: true # default: false
+
+# It is #{Time.now.year}, no need to use yoda conditions (as another lint will
+# warn us of that).
+Style/YodaCondition:
+  # default: forbid_for_all_comparison_operators
+  EnforcedStyle: forbid_for_all_comparison_operators
+
+# No need to alphabetically sort gems one by one in the Gemfile, although it is
+# not a bad idea.
+Bundler/OrderedGems:
+  Enabled: false # default: true

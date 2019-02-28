@@ -20,11 +20,9 @@ class AuthorizeApiRequest
   end
 
   def decoded_auth_token
-    begin
-      JsonWebToken.decode(http_auth_header)
-    rescue StandardError => e
-      errors.add(:token, e.message)
-    end
+    JsonWebToken.decode(http_auth_header)
+  rescue StandardError => e
+    errors.add(:token, e.message)
   end
 
   def http_auth_header
@@ -33,6 +31,7 @@ class AuthorizeApiRequest
     else
       errors.add(:token, 'Missing token')
     end
+
     nil
   end
 end

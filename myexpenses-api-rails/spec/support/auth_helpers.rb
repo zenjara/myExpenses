@@ -1,5 +1,4 @@
 module AuthHelpers
-
   def json_headers
     { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
   end
@@ -13,7 +12,7 @@ module AuthHelpers
     user_params = {
       name: name,
       email: email,
-      password: password,
+      password: password
     }
 
     headers = json_headers
@@ -23,7 +22,7 @@ module AuthHelpers
   def login_with(email, password)
     login_params = {
       email: email,
-      password: password,
+      password: password
     }
 
     headers = json_headers

@@ -19,16 +19,16 @@ class Api::V1::UsersController < ApplicationController
   def profile
     @current_user
 
-    render :json => @current_user
+    render json: @current_user
   end
 
   def set_daily_limit
     currency = fetch_or_assign_currency
     @daily_limit = @current_user.build_daily_limit(amount: params[:amount], currency: currency)
     if @daily_limit.save
-      render status: 201, json: @daily_limit
+      render status: :created, json: @daily_limit
     else
-      render status: 400, json: { "errors" => @daily_limit.errors }
+      render status: :bad_request, json: { 'errors' => @daily_limit.errors }
     end
   end
 
@@ -36,9 +36,9 @@ class Api::V1::UsersController < ApplicationController
     currency = fetch_or_assign_currency
     @monthly_limit = @current_user.build_monthly_limit(amount: params[:amount], currency: currency)
     if @monthly_limit.save
-      render status: 201, json: @monthly_limit
+      render status: :created, json: @monthly_limit
     else
-      render status: 400, json: { "errors" => @monthly_limit.errors }
+      render status: :bad_request, json: { 'errors' => @monthly_limit.errors }
     end
   end
 
@@ -66,6 +66,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def fetch_or_assign_currency
-    params[:currency] ? params[:currency] : 'HRK'
+    params[:currency] || 'HRK'
   end
 end

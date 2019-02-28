@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Expenses API", :type => :request do
+RSpec.describe 'Expenses API', type: :request do
   it 'successfully creates a new expense' do
     expense_category = create :expense_category
     expense_param = {
@@ -8,7 +8,7 @@ RSpec.describe "Expenses API", :type => :request do
       date: '10/01/2019',
       description: 'birthday party',
       currency: 'HRK',
-      expense_category_id: expense_category.id,
+      expense_category_id: expense_category.id
     }
     post '/api/v1/expenses', params: expense_param, headers: authorization_header(expense_category.user)
 
@@ -21,7 +21,7 @@ RSpec.describe "Expenses API", :type => :request do
     post '/api/v1/expenses', params: {}, headers: authorization_header(user)
 
     expect(response).to be_bad_request
-    expect(json_body['errors']['expense_category']).to eq(["must exist", "can't be blank"])
+    expect(json_body['errors']['expense_category']).to eq(['must exist', "can't be blank"])
     expect(json_body['errors']['amount']).to eq(["can't be blank"])
     expect(json_body['errors']['date']).to eq(["can't be blank"])
   end
@@ -49,7 +49,7 @@ RSpec.describe "Expenses API", :type => :request do
     expense_param = {
       amount: 500,
       date: '10/01/2019',
-      description: 'birthday party',
+      description: 'birthday party'
     }
 
     expect(Expense.first.amount).not_to eq(expense_param[:amount])
@@ -62,5 +62,4 @@ RSpec.describe "Expenses API", :type => :request do
     expect(Expense.first.date).to eq(expense_param[:date])
     expect(Expense.first.description).to eq(expense_param[:description])
   end
-
 end

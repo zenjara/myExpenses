@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users API", :type => :request do
+RSpec.describe 'Users API', type: :request do
   it 'successfully registers a user' do
     register_with('John Doe', 'jdoe@doe.com', 'password')
 
@@ -17,7 +17,7 @@ RSpec.describe "Users API", :type => :request do
     register_with('Jean Doe', 'jdoe@doe.com', 'password_another')
 
     expect(response).to be_bad_request
-    expect(json_body['email']).to eq(["has already been taken"])
+    expect(json_body['email']).to eq(['has already been taken'])
   end
 
   it 'logs a user in' do

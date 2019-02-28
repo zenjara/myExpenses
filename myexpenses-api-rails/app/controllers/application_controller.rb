@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   def authenticate_request
     @current_user = AuthorizeApiRequest.call(request.headers).result
 
-    render json: @current_user, status: 401 unless @current_user.instance_of? User
+    render json: @current_user, status: :unauthorized unless @current_user.instance_of? User
   end
 
   def set_default_format

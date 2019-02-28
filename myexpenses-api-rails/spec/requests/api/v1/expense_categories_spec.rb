@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Expense Categories API", :type => :request do
+RSpec.describe 'Expense Categories API', type: :request do
   it 'successfully creates a new expense category' do
     user = create :user
     expense_category_param = { name: 'test category' }
@@ -30,10 +30,9 @@ RSpec.describe "Expense Categories API", :type => :request do
   it 'successfully deletes expense category' do
     expense_category = create :expense_category
     expect(ExpenseCategory.all.size).to eq(1)
-    delete "/api/v1/expense_categories/#{expense_category.id}" , headers: authorization_header(expense_category.user)
+    delete "/api/v1/expense_categories/#{expense_category.id}", headers: authorization_header(expense_category.user)
 
     expect(response).to be_no_content
     expect(ExpenseCategory.all.size).to eq(0)
   end
-
 end
