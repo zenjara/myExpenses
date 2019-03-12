@@ -1,0 +1,162 @@
+.SingleDatePicker .SingleDatePickerInput {
+  padding-right: 0;
+}
+
+.SingleDatePickerInput > .SingleDatePickerInput_clearDate {
+  position: unset;
+  right: unset;
+  top: unset;
+  transform: unset;
+  margin: 0;
+}
+
+.SingleDatePickerInput
+  > .SingleDatePickerInput_clearDate
+  > .SingleDatePickerInput_clearDate_svg {
+  height: 10px;
+}
+
+.SingleDatePickerInput > .SingleDatePickerInput_clearDate:hover,
+.SingleDatePickerInput > .SingleDatePickerInput_clearDate:focus {
+  background: unset;
+  border-radius: unset;
+}
+
+.SingleDatePickerInput > .SingleDatePickerInput_calendarIcon {
+  margin: 0;
+  padding: 8px;
+}
+
+.SingleDatePickerInput > .SingleDatePickerInput_calendarIcon:before {
+  background-color: hsl(0, 0%, 80%);
+  width: 1px;
+  height: 26px;
+  margin-top: -2px;
+  content: ' ';
+  transform: translateX(-8px);
+}
+
+.DateRangePicker .DateInput {
+  width: 120px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.SingleDatePicker .DateInput,
+.SingleDatePicker .DateInput .DateInput_input {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.SingleDatePicker .DateInput .DateInput_input {
+  padding: 11px;
+  border-bottom-right-radius: 0;
+}
+
+.SingleDatePicker .DateInput .DateInput_input.DateInput_input__disabled {
+  border-radius: 4px 0 0 4px;
+  color: #999;
+  font-style: normal;
+}
+
+.SingleDatePicker .SingleDatePickerInput {
+  height: 44px;
+  border: solid 1px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.error .SingleDatePicker .SingleDatePickerInput {
+  border-color: #f33737;
+}
+.error .SingleDatePicker .SingleDatePickerInput .DateInput_input::placeholder {
+  color: #f33737;
+}
+
+.SingleDatePicker .SingleDatePickerInput,
+.SingleDatePicker .SingleDatePickerInput button {
+  display: flex;
+  outline: none;
+}
+
+.SingleDatePicker
+  .SingleDatePickerInput.SingleDatePickerInput__disabled
+  button {
+  border-radius: 0 4px 4px 0;
+  background-color: #f2f2f2;
+  color: #999;
+}
+
+.SingleDatePicker
+  .SingleDatePickerInput.SingleDatePickerInput__disabled
+  svg
+  path:nth-child(2) {
+  fill: #999;
+}
+
+.DateRangePickerInput__withBorder,
+.SingleDatePickerInput__withBorder {
+  border: solid 1px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.DateInput_input {
+  color: #111;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.DateInput_input__focused {
+  border-bottom: 2px solid #633147;
+}
+
+/*
+  Styles for selected date boxes between Start/End date boxes
+*/
+.CalendarDay__selected_span {
+  border: 1px double #794c68;
+  background: #d2f1ff;
+  color: #4c2324;
+}
+
+/*
+  Styles for selected hovered date boxes between Start/End date boxes
+*/
+.CalendarDay__selected_span:active,
+.CalendarDay__selected_span:hover {
+  border: 1px double #794c68;
+  background: #794c68;
+  color: #fff;
+}
+
+/*
+  Styles for hovered (but still not selected!) date boxes between Start/End date boxes
+*/
+.CalendarDay__hovered_span,
+.CalendarDay__hovered_span:active,
+.CalendarDay__hovered_span:hover {
+  border: 1px double #794c68;
+  background: #d2f1ff;
+  color: #4c2324;
+}
+
+/*
+  Selected Start/End date box styles
+*/
+.CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  border: 1px double #633147;
+  background: #633147;
+  color: #fff;
+}
