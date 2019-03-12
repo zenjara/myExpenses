@@ -63,6 +63,6 @@ export function post(url, data, config) {
   return instance.post(url, data, config);
 }
 
-export function httpDelete(url, config) {
+export function remove(url, config) {
   return instance.delete(url, config);
 }
