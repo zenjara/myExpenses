@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
+import moment from 'moment';
 
 import MeCard from '../../MeCard';
 import MeButton from '../../MeButton';
 import MeSelect from '../../MeSelect';
+import MeDatepicker from '../../MeDatepicker';
+import ArrowDownIcon from '../../Icons/ArrowDownIcon';
 import styles from './NewModal.styles';
 
 class NewModal extends Component {
@@ -16,17 +19,25 @@ class NewModal extends Component {
     this.state = {
       expenseAmount: '',
       expenseCategory: null,
-      expenseDescription: ''
+      expenseDescription: '',
+      expenseDate: moment(new Date()),
+      expenseDateFocused: false
     };
   }
 
   handleFormSubmit() {
-    const { expenseAmount, expenseCategory, expenseDescription } = this.state;
+    const {
+      expenseAmount,
+      expenseCategory,
+      expenseDescription,
+      expenseDate
+    } = this.state;
 
     this.props.createExpense({
       expenseAmount,
       expenseCategory,
-      expenseDescription
+      expenseDescription,
+      expenseDate
     });
   }
 
@@ -43,7 +54,12 @@ class NewModal extends Component {
 
   render() {
     const { classes, hideModal, categories } = this.props;
-    const { expenseAmount, expenseDescription } = this.state;
+    const {
+      expenseAmount,
+      expenseDescription,
+      expenseDate,
+      expenseDateFocused
+    } = this.state;
 
     const categoryOptions = categories.map(({ id, name }) => ({
       value: id,
@@ -85,9 +101,30 @@ class NewModal extends Component {
                 </div>
               </div>
               <div className={classes.formField}>
+                <label>DATE</label>
+                <MeDatepicker
+                  date={expenseDate}
+                  focused={expenseDateFocused}
+                  onDateChange={date => this.setState({ expenseDate: date })}
+                  onFocusChange={({ focused }) =>
+                    this.setState({ expenseDateFocused: focused })
+                  }
+                  customInputIcon={
+                    <ArrowDownIcon color="rgba(0, 0, 0, 0.25)" opacity="1" />
+                  }
+                  inputIconPosition="after"
+                  hideKeyboardShortcutsPanel
+                  placeholder=""
+                  numberOfMonths={1}
+                  block
+                  readOnly
+                  isOutsideRange={() => false}
+                />
+              </div>
+              <div className={classes.formField}>
                 <label>EXPENSE DESCRIPTION</label>
                 <textarea
-                  className={classes.modalInput}
+                  className={classes.modalTextarea}
                   value={expenseDescription}
                   onChange={event => {
                     this.handleInputChange(

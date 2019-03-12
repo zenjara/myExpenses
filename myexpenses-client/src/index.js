@@ -8,9 +8,12 @@ import { HashRouter, MemoryRouter } from 'react-router-dom';
 import store from './store';
 import { Provider } from 'react-redux';
 
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
 import 'normalize.css';
 import './styles/index.css';
 import './styles/fonts.css';
+import './styles/react_dates_overrides.css';
 
 import App from './components/App';
 import LocalStorage from './localStorage';
