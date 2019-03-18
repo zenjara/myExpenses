@@ -1,17 +1,14 @@
 class Api::V1::MetricsController < ApplicationController
   def expense_calculations
-    beginning_of_month = Date.today.beginning_of_month
-    beginning_of_next_month = beginning_of_month.next_month
-
     metrics = {}
     metrics['dailyLimit'] = @current_user.daily_limit.amount unless @current_user.daily_limit.nil?
     metrics['monthlyLimit'] = @current_user.monthly_limit.amount unless @current_user.monthly_limit.nil?
-    metrics['dailyExpenses'] = Expense.where(user_id: @current_user.id, date: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).pluck('amount').compact.sum
-    metrics['monthlyExpenses'] = Expense.where(user_id: @current_user.id, date: beginning_of_month..beginning_of_next_month).pluck('amount').compact.sum
+    metrics['dailyExpenses'] = Expense.for_today(@current_user).pluck('amount').compact.sum
+    metrics['monthlyExpenses'] = Expense.this_month(@current_user).pluck('amount').compact.sum
 
     metrics['expense_categories'] = {}
     @current_user.expense_categories.each do |category|
-      metrics['expense_categories'][category.name] = Expense.where(user_id: @current_user.id, expense_category_id: category, date: beginning_of_month..beginning_of_next_month).pluck('amount').compact.sum
+      metrics['expense_categories'][category.name] = Expense.this_month_for_category(@current_user,category).pluck('amount').compact.sum
     end
 
     render status: :ok, json: metrics
