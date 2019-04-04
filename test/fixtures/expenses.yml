@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amo: 1.5
+  description: MyString
+  currency: MyString
+
+two:
+  amo: 1.5
+  description: MyString
+  currency: MyString

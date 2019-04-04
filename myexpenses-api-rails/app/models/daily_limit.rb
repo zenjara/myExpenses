@@ -1,5 +1,4 @@
 class DailyLimit < ApplicationRecord
-	belongs_to :user
-	validates_presence_of :amount, :currency
-
+  belongs_to :user
+  validates :amount, :currency, presence: true
 end
