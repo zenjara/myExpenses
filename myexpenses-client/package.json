@@ -1,6 +1,6 @@
 {
   "name": "myexpenses-client",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": true,
   "description": "First version of MyExpenses client application.",
   "author": "MyExpenses <korac.kristijan@gmail.com>",
@@ -30,6 +30,8 @@
   ],
   "dependencies": {
     "axios": "^0.18.0",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
     "moment": "^2.24.0",
     "normalize.css": "^8.0.0",
     "react": "^16.8.4",

@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import injectSheet from 'react-jss';
 
 import { getDashboardMetrics } from './DashboardPage.data';
 import MeCard from '../Shared/MeCard';
+import BarChart from './BarChart/BarChart';
 import LoadingSpinner from '../Shared/Icons/LoadingSpinner';
 import styles from './DashboardPage.styles';
 
@@ -17,7 +18,8 @@ class DashboardPage extends Component {
       dailyLimit: null,
       dailyExpenses: null,
       monthlyLimit: null,
-      monthlyExpenses: null
+      monthlyExpenses: null,
+      expenseCategories: {}
     };
   }
 
@@ -25,11 +27,17 @@ class DashboardPage extends Component {
     getDashboardMetrics().then(res => {
       const { dailyLimit, dailyExpenses, monthlyLimit, monthlyExpenses } = res;
 
+      const xData = Object.values(res.expense_categories);
+      const yData = Object.keys(res.expense_categories);
+
+      const expenseCategories = { xData, yData };
+
       this.setState({
         dailyLimit,
         dailyExpenses,
         monthlyLimit,
         monthlyExpenses,
+        expenseCategories,
         loading: false
       });
     });
@@ -76,7 +84,8 @@ class DashboardPage extends Component {
       dailyLimit,
       dailyExpenses,
       monthlyLimit,
-      monthlyExpenses
+      monthlyExpenses,
+      expenseCategories
     } = this.state;
 
     const dailyStatsTitle = `Daily stats (${new Date().toLocaleString('us', {
@@ -99,22 +108,27 @@ class DashboardPage extends Component {
           {loading ? (
             this.renderLoadingState()
           ) : (
-            <div className={classes.dashboardStats}>
-              <div className={classes.dailyStatsWrapper}>
-                {this.renderStatCard(
-                  dailyStatsTitle,
-                  dailyLimit,
-                  dailyExpenses
-                )}
+            <Fragment>
+              <div className={classes.dashboardStats}>
+                <div className={classes.dailyStatsWrapper}>
+                  {this.renderStatCard(
+                    dailyStatsTitle,
+                    dailyLimit,
+                    dailyExpenses
+                  )}
+                </div>
+                <div className={classes.monthlyStatsWrapper}>
+                  {this.renderStatCard(
+                    monthlyStatsTitle,
+                    monthlyLimit,
+                    monthlyExpenses
+                  )}
+                </div>
               </div>
-              <div className={classes.monthlyStatsWrapper}>
-                {this.renderStatCard(
-                  monthlyStatsTitle,
-                  monthlyLimit,
-                  monthlyExpenses
-                )}
+              <div className={classes.dashboardMetrics}>
+                <BarChart data={expenseCategories} />
               </div>
-            </div>
+            </Fragment>
           )}
         </div>
       </div>
