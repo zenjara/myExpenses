@@ -33,7 +33,20 @@ const styles = {
     boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.1)'
   },
   categoryListItem: {
+    display: 'flex',
+    alignItems: 'center',
     marginBottom: '18px'
+  },
+  listItemInfo: {
+    flexGrow: 1
+  },
+  deleteAction: {
+    textAlign: 'center',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#794C68',
+      textDecoration: 'underline'
+    }
   },
   categoryName: {
     fontSize: '24px'

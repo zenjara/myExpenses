@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import { createCategory, getCategories } from './CategoriesPage.data';
+import {
+  createCategory,
+  getCategories,
+  deleteCategory
+} from './CategoriesPage.data';
 import PlusIcon from '../Shared/Icons/PlusIcon';
 import MeModal from '../Shared/MeModal';
 import MeCard from '../Shared/MeCard';
@@ -49,6 +53,22 @@ class CategoriesPage extends Component {
     this.setState({ currentModal: modal });
   }
 
+  handleDeleteClick(categoryId) {
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this category?'
+    );
+
+    if (confirmation) {
+      deleteCategory(categoryId).then(() => {
+        const newCategories = this.state.categories.filter(
+          category => category.id !== categoryId
+        );
+
+        this.setState({ categories: newCategories });
+      });
+    }
+  }
+
   sortCategories(categories) {
     return categories.sort((prev, next) => (prev.name > next.name ? 1 : -1));
   }
@@ -77,14 +97,22 @@ class CategoriesPage extends Component {
             className={classes.categoryListItem}
             key={`category-${category.name}`}
           >
-            <div className={classes.categoryName}>{category.name}</div>
-            <div className={classes.categoryCreated}>
-              Date added:&nbsp;
-              {new Date(category.created_at).toLocaleString('us', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric'
-              })}
+            <div className={classes.listItemInfo}>
+              <div className={classes.categoryName}>{category.name}</div>
+              <div className={classes.categoryCreated}>
+                Date added:&nbsp;
+                {new Date(category.created_at).toLocaleString('us', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric'
+                })}
+              </div>
+            </div>
+            <div
+              className={classes.deleteAction}
+              onClick={() => this.handleDeleteClick(category.id)}
+            >
+              Delete
             </div>
           </div>
         ))}

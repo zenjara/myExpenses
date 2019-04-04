@@ -33,9 +33,9 @@ Rails:
 # format and still keep full Rails functionality.
 AllCops:
   Exclude:
-  - 'db/**/*'
-  - 'bin/**/*'
-  - 'vendor/**/*'
+    - "db/**/*"
+    - "bin/**/*"
+    - "vendor/**/*"
 
 # Rake files and RSpec files generally have long blocks because of their DSL, so
 # disable that lint.
@@ -43,10 +43,10 @@ AllCops:
 # describe blocks per file instead of stuffing everything inside of one)
 Metrics/BlockLength:
   Exclude:
-  - Rakefile
-  - '**/*.rake'
-  - spec/**/*.rb
-  - config/routes.rb
+    - Rakefile
+    - "**/*.rake"
+    - spec/**/*.rb
+    - config/routes.rb
 
 # No need to meticulously comment every single class in a framework as
 # standardised as Rails.
@@ -55,7 +55,7 @@ Style/Documentation:
 
 # {a: 'b', 'c' => 'd'} looks ugly, stick with one or the other.
 Style/HashSyntax:
-  EnforcedStyle: 'ruby19_no_mixed_keys' # default: ruby19
+  EnforcedStyle: "ruby19_no_mixed_keys" # default: ruby19
 
 # You should always specify the error that you are raising.
 # good: raise ArgumentError, 'Error message'
