@@ -40,6 +40,9 @@ const styles = {
   statSeparator: {
     border: 0,
     borderTop: `1px solid ${myExpensesPurple}`
+  },
+  dashboardMetrics: {
+    marginTop: '32px'
   }
 };
 
